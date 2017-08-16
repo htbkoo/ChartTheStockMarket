@@ -118,3 +118,5 @@ shelf/
 
 # MongoDb data
 data/
+
+build/
