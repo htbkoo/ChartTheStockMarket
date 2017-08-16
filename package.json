@@ -6,7 +6,18 @@
   "author": "htbkoo",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "clean": "rimraf ./build/ && mkdir build",
+    "build-ui": "cd ./views/chart-the-stock-market-ui && npm run build",
+    "clean-ui": "rimraf ./build/views/chart-the-stock-market-ui",
+    "copy-ui": "npm run clean-ui && cpx ./views/chart-the-stock-market-ui/build/**/* ./build/views/chart-the-stock-market-ui",
+    "pack-ui": "npm run build-ui && npm run copy-ui",
+    "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "build-all": "npm run clean && npm run build-server && npm run pack-ui",
+    "run": "babel-node ./build/bin/www",
+    "rebuild-run": "npm run build-all && npm run run",
+    "debug": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
+    "rebuild-debug": "npm run build-all && npm run debug"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -24,7 +35,8 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.1",
-    "gulp": "^3.9.1",
-    "mocha": "^3.5.0"
+    "cpx": "^1.5.0",
+    "mocha": "^3.5.0",
+    "rimraf": "^2.6.1"
   }
 }
