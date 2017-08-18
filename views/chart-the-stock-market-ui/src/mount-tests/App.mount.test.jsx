@@ -5,7 +5,9 @@ import App from '../App.jsx';
 
 require('./setup.jsx');
 
-it('renders without crashing', () => {
-    // const
-    mount(<App/>);
+describe("mount test - App", function () {
+    it('renders without crashing', () => {
+        // const
+        mount(<App/>);
+    });
 });
