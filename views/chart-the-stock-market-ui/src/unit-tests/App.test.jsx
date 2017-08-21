@@ -20,4 +20,15 @@ describe("App", function () {
             <Stocks/>,
         ])).to.be.true;
     });
+
+    it('should pass empty array prop stocks to <Stocks />', () => {
+        // given
+
+        // when
+        let wrapper = shallow(<App/>);
+
+        // then
+        let stockComponents = wrapper.find(Stocks);
+        chai.expect(stockComponents).to.have.prop('stocks').to.be.an('array').that.is.empty;
+    });
 });

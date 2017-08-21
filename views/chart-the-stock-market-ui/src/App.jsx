@@ -10,7 +10,7 @@ class App extends Component {
             <div className="App">
                 <div className="AppContainer">
                     <ChartContainer/>
-                    <Stocks/>
+                    <Stocks stocks={[]}/>
                 </div>
             </div>
         );
