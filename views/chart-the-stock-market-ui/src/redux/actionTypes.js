@@ -1,3 +1,3 @@
-export const types = {
+export default {
     ADD_STOCK: "ADD_STOCK"
 };
