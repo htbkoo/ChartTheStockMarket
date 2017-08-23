@@ -8,31 +8,64 @@ describe("reduxReducers", function () {
         stocks: []
     };
 
-    it("should return the initial state", function () {
-        //    given
-        const expectedState = initialState;
+    [
+        {
+            name: "should return the initial state",
+            params: {
+                state: undefined,
+                action: {}
+            },
+            expectedState: initialState
+        },
+        {
+            name: "should handle ADD_STOCK for uninitialized stat",
+            params: {
+                state: undefined,
+                action: {
+                    type: types.ADD_STOCK,
+                    underlyingId: "someId"
+                }
+            },
+            expectedState: {
+                stocks: ["someId"]
+            }
+        },
+        {
+            name: "should handle ADD_STOCK for empty stocks case",
+            params: {
+                state: initialState,
+                action: {
+                    type: types.ADD_STOCK,
+                    underlyingId: "someId"
+                }
+            },
+            expectedState: {
+                stocks: ["someId"]
+            }
+        },
+        {
+            name: "should handle ADD_STOCK for non-empty stocks case",
+            params: {
+                state: {
+                    stocks: ["existing"]
+                },
+                action: {
+                    type: types.ADD_STOCK,
+                    underlyingId: "someId"
+                }
+            },
+            expectedState: {
+                stocks: ["existing", "someId"]
+            }
+        },
+    ].forEach(testCase =>
+        it(testCase.name, function () {
+            //    given
+            //    when
+            let state = reducers(testCase.params.state, testCase.params.action);
 
-        //    when
-        let state = reducers(undefined, {});
-
-        //    then
-        chai.expect(state).to.deep.equal(expectedState);
-    });
-
-    it("should handle ADD_STOCK", function () {
-        //    given
-        const underlyingId = "someId";
-        const expectedState = {
-            stocks: [underlyingId]
-        };
-
-        //    when
-        let state = reducers(initialState, {
-            type: types.ADD_STOCK,
-            underlyingId
-        });
-
-        //    then
-        chai.expect(state).to.deep.equal(expectedState);
-    });
+            //    then
+            chai.expect(state).to.deep.equal(testCase.expectedState);
+        })
+    );
 });
