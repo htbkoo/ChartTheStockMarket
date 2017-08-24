@@ -69,6 +69,56 @@ describe("reduxReducers", function () {
         );
     });
 
+    describe("removeStock", function () {
+        [
+            {
+                name: "should handle REMOVE_STOCK for uninitialized stat",
+                params: {
+                    state: undefined,
+                    action: {
+                        type: types.REMOVE_STOCK,
+                        underlyingId: "someId"
+                    }
+                },
+                expectedState: {
+                    stocks: []
+                }
+            },
+            {
+                name: "should handle REMOVE_STOCK for unmatched case",
+                params: {
+                    state: {
+                        stocks: ["anotherId"]
+                    },
+                    action: {
+                        type: types.REMOVE_STOCK,
+                        underlyingId: "someId"
+                    }
+                },
+                expectedState: {
+                    stocks: ["anotherId"]
+                }
+            },
+            {
+                name: "should handle REMOVE_STOCK for matched case",
+                params: {
+                    state: {
+                        stocks: ["someId"]
+                    },
+                    action: {
+                        type: types.REMOVE_STOCK,
+                        underlyingId: "someId"
+                    }
+                },
+                expectedState: {
+                    stocks: []
+                }
+            },
+        ].forEach(testCase =>
+            it(testCase.name, testReducer(testCase))
+        );
+    });
+
     function testReducer(testCase) {
         return function () {
             //    given
