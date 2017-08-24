@@ -64,6 +64,21 @@ describe("reduxReducers", function () {
                     stocks: ["existing", "someId"]
                 }
             },
+            {
+                name: "should handle ADD_STOCK for same underlyingId case",
+                params: {
+                    state: {
+                        stocks: ["duplicate"]
+                    },
+                    action: {
+                        type: types.ADD_STOCK,
+                        underlyingId: "duplicate"
+                    }
+                },
+                expectedState: {
+                    stocks: ["duplicate"]
+                }
+            },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
         );
