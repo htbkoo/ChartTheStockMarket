@@ -64,17 +64,44 @@ describe("reduxReducers", function () {
                     stocks: ["existing", "someId"]
                 }
             },
-        ].forEach(testCase => it(testCase.name, testReducer(testCase)));
+        ].forEach(testCase =>
+            it(testCase.name, testReducer(testCase))
+        );
     });
 
     function testReducer(testCase) {
         return function () {
             //    given
+            // const previousState = JSON.parse(JSON.stringify(testCase.params.state));
+            const paramState = testCase.params.state;
+            const previousState = isDefined(paramState) ? {...paramState} : undefined;
+
             //    when
-            let state = reducers(testCase.params.state, testCase.params.action);
+            let state = reducers(paramState, testCase.params.action);
 
             //    then
             chai.expect(state).to.deep.equal(testCase.expectedState);
+            if (isDefined(paramState)) {
+                assertState(paramState).toHaveNoMutation.suchThat.itEqualsTo(previousState);
+            }
+            assertState(initialState).toHaveNoMutation.suchThat.itEqualsTo({
+                    stocks: []
+                }
+            );
         };
+    }
+
+    function assertState(state) {
+        return {
+            toHaveNoMutation: {
+                suchThat: {
+                    itEqualsTo: target => chai.expect(state).to.deep.equal(target)
+                }
+            }
+        }
+    }
+
+    function isDefined(obj) {
+        return typeof obj !== "undefined";
     }
 });
