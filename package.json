@@ -11,7 +11,7 @@
     "build-ui": "cd ./views/chart-the-stock-market-ui && npm run build",
     "copy-ui": "cpx ./views/chart-the-stock-market-ui/build/**/* ./build/public",
     "pack-ui": "npm run build-ui && npm run copy-ui",
-    "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,chart-the-stock-market-ui,build --copy-files",
+    "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,chart-the-stock-market-ui,build,__mocks__ --copy-files",
     "build-all": "npm run clean && npm run build-server && npm run pack-ui",
     "run": "babel-node ./build/bin/www",
     "rebuild-run": "npm run build-all && npm run run",
@@ -36,8 +36,16 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.1",
     "cpx": "^1.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "istanbul": "^0.4.5",
+    "jest": "^20.0.4",
     "mocha": "^3.5.0",
     "rimraf": "^2.6.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }
