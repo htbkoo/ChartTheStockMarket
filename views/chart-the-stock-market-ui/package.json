@@ -20,6 +20,7 @@
     "react-test-renderer": "^15.6.1",
     "redux-devtools": "^3.4.0",
     "redux-devtools-extension": "^2.13.2",
+    "redux-mock-store": "^1.2.3",
     "sinon": "^3.2.1",
     "sinon-test": "^2.1.0"
   },
