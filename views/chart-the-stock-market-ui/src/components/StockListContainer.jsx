@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import * as actions from '../redux/reduxActions';
-import Stocks from './Stocks';
+import StockList from './StockList';
 
 const mapStateToProps = state => ({
     "stocks": state.stocks
@@ -13,9 +13,9 @@ export const mapDispatchToProps = dispatch => ({
     }
 });
 
-const StocksContainer = connect(
+const StockListContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Stocks);
+)(StockList);
 
-export default StocksContainer;
+export default StockListContainer;

@@ -2,17 +2,17 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 
-import Stocks from '../components/Stocks.jsx';
+import StockList from '../components/StockList.jsx';
 
 import Stock from '../components/Stock.jsx';
 
-describe("Stocks", function () {
-    it('should have a list of <Stock/> in <Stocks stocks/>', () => {
+describe("StockList", function () {
+    it('should have a list of <Stock/> in <StockList stocks/>', () => {
         // given
         let stocks = [{"name": "A"}, {"name": "B"}];
 
         // when
-        let wrapper = shallow(<Stocks stocks={stocks}/>);
+        let wrapper = shallow(<StockList stocks={stocks}/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(2);
@@ -23,11 +23,11 @@ describe("Stocks", function () {
         );
     });
 
-    it('should be able to render <Stocks/> even if stocks props is an empty list', () => {
+    it('should be able to render <StockList/> even if stocks props is an empty list', () => {
         // given
 
         // when
-        let wrapper = shallow(<Stocks stocks={[]}/>);
+        let wrapper = shallow(<StockList stocks={[]}/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(0);

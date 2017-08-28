@@ -4,24 +4,24 @@ import configureStore from 'redux-mock-store';
 import chai from '../test-util/chaiWithEnzyme';
 import sinon from '../test-util/sinonWithSinonTest';
 
-import StocksContainer, {mapDispatchToProps} from '../components/StocksContainer.jsx';
+import StockListContainer, {mapDispatchToProps} from '../components/StockListContainer.jsx';
 
-import Stocks from '../components/Stocks.jsx';
+import StockList from '../components/StockList.jsx';
 import {addStock} from '../redux/reduxActions';
 
-describe("StocksContainer", function () {
+describe("StockListContainer", function () {
     describe("rendering", function () {
-        it("should render the connected(Stocks) component", function () {
+        it("should render the connected(StockList) component", function () {
             //    given
             let initialState = {};
             let store = configureStore()(initialState);
 
             //    when
-            let container = shallow(<StocksContainer store={store}/>);
+            let container = shallow(<StockListContainer store={store}/>);
 
             //    then
             chai.expect(container).to.have.length(1);
-            chai.expect(container.type()).to.equal(Stocks);
+            chai.expect(container.type()).to.equal(StockList);
         });
     });
 
@@ -33,7 +33,7 @@ describe("StocksContainer", function () {
             let store = configureStore()(initialState);
 
             //    when
-            let container = shallow(<StocksContainer store={store}/>);
+            let container = shallow(<StockListContainer store={store}/>);
 
             //    then
             chai.expect(container).to.have.prop('stocks').that.equal(stocks);
