@@ -5,10 +5,10 @@ import chai from '../test-util/chaiWithEnzyme';
 import App from '../App.jsx';
 
 import ChartContainer from '../components/ChartContainer.jsx';
-import Stocks from '../components/Stocks.jsx';
+import StocksContainer from '../components/StocksContainer.jsx';
 
 describe("App", function () {
-    it('should have a <ChartContainer /> and <Stocks /> in <App />', () => {
+    it('should have a <ChartContainer /> and <StocksContainer /> in <App />', () => {
         // given
 
         // when
@@ -17,18 +17,7 @@ describe("App", function () {
         // then
         chai.expect(wrapper.containsAllMatchingElements([
             <ChartContainer/>,
-            <Stocks/>,
+            <StocksContainer/>,
         ])).to.be.true;
-    });
-
-    it('should pass empty array prop stocks to <Stocks />', () => {
-        // given
-
-        // when
-        let wrapper = shallow(<App/>);
-
-        // then
-        let stockComponents = wrapper.find(Stocks);
-        chai.expect(stockComponents).to.have.prop('stocks').to.be.an('array').that.is.empty;
     });
 });
