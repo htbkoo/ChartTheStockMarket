@@ -41,7 +41,7 @@ describe("StockListContainer", function () {
     });
 
     describe("dispatch", function () {
-        it("should contain the 'stocks' props from initial state", sinon.test(function () {
+        it("should dispatch onAddStock to actions.addStock", sinon.test(function () {
             //    given
             const underlyingId = "id";
             let dispatchSpy = this.spy();
