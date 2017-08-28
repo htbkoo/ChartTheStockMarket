@@ -1,7 +1,7 @@
 import chai from "chai";
 
-import reducers from "../redux/reduxReducers";
-import types from "../redux/actionTypes";
+import reducers from "../reduxReducers";
+import types from "../actionTypes";
 
 describe("reduxReducers", function () {
     const initialState = {
