@@ -1,23 +1,26 @@
 import types from "./actionTypes"
+import {Map, List} from 'immutable';
 
-const initialState = {
-    stocks: []
-};
+const initialState = Map({
+    stocks: List()
+});
 
 export default function stocks(state = initialState, action) {
     let targetUnderlyingId = action.underlyingId;
-    let index = state.stocks.indexOf(targetUnderlyingId);
+    let stateStocks = state.get('stocks');
+    let index = stateStocks.indexOf(targetUnderlyingId);
     switch (action.type) {
         case types.ADD_STOCK: {
-            let newState = {...state, stocks: state.stocks.slice()};
             if (index === -1) {
-                newState.stocks.push(targetUnderlyingId);
+                return state.set('stocks', stateStocks.push(targetUnderlyingId));
             }
-            return newState;
+            return state;
         }
         case types.REMOVE_STOCK: {
-            let stocks = state.stocks.slice().filter(existing => existing !== targetUnderlyingId);
-            return {...state, stocks};
+            if (index !== -1) {
+                return state.set('stocks', stateStocks.delete(index));
+            }
+            return state;
         }
         default:
             return state;

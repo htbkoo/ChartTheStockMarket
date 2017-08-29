@@ -1,12 +1,14 @@
 import chai from "chai";
+import chaiImmutable from "chai-immutable";
+import {Map, List} from "immutable";
 
 import reducers from "../reduxReducers";
 import types from "../actionTypes";
 
+chai.use(chaiImmutable);
+
 describe("reduxReducers", function () {
-    const initialState = {
-        stocks: []
-    };
+    const initialState = createImmutableState().withStocks([]);
 
     describe("no action", function () {
         it("should return the initial state", testReducer({
@@ -32,9 +34,7 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: ["someId"]
-                }
+                expectedState: createImmutableState().withStocks(["someId"])
             },
             {
                 name: "should handle ADD_STOCK for empty stocks case",
@@ -45,39 +45,29 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: ["someId"]
-                }
+                expectedState: createImmutableState().withStocks(["someId"])
             },
             {
                 name: "should handle ADD_STOCK for non-empty stocks case",
                 params: {
-                    state: {
-                        stocks: ["existing"]
-                    },
+                    state: createImmutableState().withStocks(["existing"]),
                     action: {
                         type: types.ADD_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: ["existing", "someId"]
-                }
+                expectedState: createImmutableState().withStocks(["existing", "someId"])
             },
             {
                 name: "should handle ADD_STOCK for same underlyingId case",
                 params: {
-                    state: {
-                        stocks: ["duplicate"]
-                    },
+                    state: createImmutableState().withStocks(["duplicate"]),
                     action: {
                         type: types.ADD_STOCK,
                         underlyingId: "duplicate"
                     }
                 },
-                expectedState: {
-                    stocks: ["duplicate"]
-                }
+                expectedState: createImmutableState().withStocks(["duplicate"])
             },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
@@ -95,39 +85,29 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: []
-                }
+                expectedState: createImmutableState().withStocks([])
             },
             {
                 name: "should handle REMOVE_STOCK for unmatched case",
                 params: {
-                    state: {
-                        stocks: ["anotherId"]
-                    },
+                    state: createImmutableState().withStocks(["anotherId"]),
                     action: {
                         type: types.REMOVE_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: ["anotherId"]
-                }
+                expectedState: createImmutableState().withStocks(["anotherId"])
             },
             {
                 name: "should handle REMOVE_STOCK for matched case",
                 params: {
-                    state: {
-                        stocks: ["someId"]
-                    },
+                    state: createImmutableState().withStocks(["someId"]),
                     action: {
                         type: types.REMOVE_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: {
-                    stocks: []
-                }
+                expectedState: createImmutableState().withStocks([])
             },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
@@ -139,19 +119,20 @@ describe("reduxReducers", function () {
             //    given
             // const previousState = JSON.parse(JSON.stringify(testCase.params.state));
             const paramState = testCase.params.state;
-            const previousState = isDefined(paramState) ? {...paramState} : undefined;
+            const previousState = isDefined(paramState) ? paramState : undefined;
 
             //    when
             let state = reducers(paramState, testCase.params.action);
 
             //    then
-            chai.expect(state).to.deep.equal(testCase.expectedState);
+            chai.expect(testCase.expectedState).to.equal(state);
+            // chai.expect(testCase.expectedState.equals(state)).to.equal(true, 'expected: testCase.expectedState.equals(state)');
             if (isDefined(paramState)) {
                 assertState(paramState).toHaveNoMutation.suchThat.itEqualsTo(previousState);
             }
-            assertState(initialState).toHaveNoMutation.suchThat.itEqualsTo({
-                    stocks: []
-                }
+            assertState(initialState).toHaveNoMutation.suchThat.itEqualsTo(Map({
+                    stocks: List()
+                })
             );
         };
     }
@@ -160,7 +141,7 @@ describe("reduxReducers", function () {
         return {
             toHaveNoMutation: {
                 suchThat: {
-                    itEqualsTo: target => chai.expect(state).to.deep.equal(target)
+                    itEqualsTo: target => chai.expect(state).to.equal(target)
                 }
             }
         }
@@ -168,5 +149,15 @@ describe("reduxReducers", function () {
 
     function isDefined(obj) {
         return typeof obj !== "undefined";
+    }
+
+    function createImmutableState() {
+        return {
+            withStocks(stocks) {
+                return Map({
+                    stocks: List(stocks)
+                });
+            }
+        };
     }
 });
