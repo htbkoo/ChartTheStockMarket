@@ -4,9 +4,7 @@ import Stock from './Stock';
 
 export default class StockList extends Component {
     render() {
-        let stockComponents = ('stocks' in this.props) ?
-            this.props.stocks.map((stock, key) => (<Stock stock={stock} key={key}/>)) :
-            "";
+        let stockComponents = this.props.stocks.map((stock, key) => (<Stock stock={stock} key={key}/>));
 
         return (
             <div className="StockListContainer">
@@ -15,3 +13,7 @@ export default class StockList extends Component {
         );
     }
 }
+
+StockList.defaultProps = {
+    stocks: []
+};

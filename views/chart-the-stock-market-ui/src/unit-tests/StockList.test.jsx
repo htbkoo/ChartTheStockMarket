@@ -23,11 +23,21 @@ describe("StockList", function () {
         );
     });
 
-    it('should be able to render <StockList/> even if stocks props is an empty list', () => {
+    it('should be able to render <StockList/> if stocks props is an empty list', () => {
         // given
 
         // when
         let wrapper = shallow(<StockList stocks={[]}/>);
+
+        // then
+        assertNumberOfStockIn(wrapper).to.be(0);
+    });
+
+    it('should be able to render <StockList/> if stocks props is missing, by using prop-types to default to empty array', () => {
+        // given
+
+        // when
+        let wrapper = shallow(<StockList/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(0);
