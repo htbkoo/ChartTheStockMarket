@@ -117,7 +117,6 @@ describe("reduxReducers", function () {
     function testReducer(testCase) {
         return function () {
             //    given
-            // const previousState = JSON.parse(JSON.stringify(testCase.params.state));
             const paramState = testCase.params.state;
             const previousState = isDefined(paramState) ? paramState : undefined;
 
@@ -126,7 +125,6 @@ describe("reduxReducers", function () {
 
             //    then
             chai.expect(testCase.expectedState).to.equal(state);
-            // chai.expect(testCase.expectedState.equals(state)).to.equal(true, 'expected: testCase.expectedState.equals(state)');
             if (isDefined(paramState)) {
                 assertState(paramState).toHaveNoMutation.suchThat.itEqualsTo(previousState);
             }
