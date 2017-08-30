@@ -5,10 +5,10 @@ import chai from '../test-util/chaiWithEnzyme';
 import App from '../App.jsx';
 
 import ChartContainer from '../components/ChartContainer.jsx';
-import StockListContainer from '../components/StockListContainer.jsx';
+import StockSection from '../components/StockSection.jsx';
 
 describe("App", function () {
-    it('should have a <ChartContainer /> and <StockListContainer /> in <App />', () => {
+    it('should have a <ChartContainer /> and <StockSection /> in <App />', () => {
         // given
 
         // when
@@ -17,7 +17,7 @@ describe("App", function () {
         // then
         chai.expect(wrapper.containsAllMatchingElements([
             <ChartContainer/>,
-            <StockListContainer/>,
+            <StockSection/>,
         ])).to.be.true;
     });
 });

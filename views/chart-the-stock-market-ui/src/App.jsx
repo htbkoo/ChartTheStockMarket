@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 import ChartContainer from './components/ChartContainer.jsx';
-import StockListContainer from './components/StockListContainer.jsx';
+import StockSection from './components/StockSection.jsx';
 
 class App extends Component {
     render() {
@@ -10,7 +10,7 @@ class App extends Component {
             <div className="App">
                 <div className="AppContainer">
                     <ChartContainer/>
-                    <StockListContainer/>
+                    <StockSection/>
                 </div>
             </div>
         );
