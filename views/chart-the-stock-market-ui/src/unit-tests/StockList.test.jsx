@@ -16,7 +16,7 @@ describe("StockList", function () {
 
         // then
         assertNumberOfStockIn(wrapper).to.be(2);
-        let stockComponents = wrapper.find(Stock);
+        let stockComponents = wrapper.find("ul").find(Stock);
         stockComponents.forEach(
             (component, key) =>
                 chai.expect(component).to.have.prop('stock').deep.equal(stocks[key])
@@ -46,7 +46,7 @@ describe("StockList", function () {
     function assertNumberOfStockIn(wrapper) {
         return {
             "to": {
-                "be": size => chai.expect(wrapper.find(Stock).length).to.equal(size)
+                "be": size => chai.expect(wrapper.find("ul").find(Stock).length).to.equal(size)
             }
         }
     }

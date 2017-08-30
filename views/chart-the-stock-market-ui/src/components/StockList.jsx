@@ -7,9 +7,9 @@ export default class StockList extends Component {
         let stockComponents = this.props.stocks.map((stock, key) => (<Stock stock={stock} key={key}/>));
 
         return (
-            <div className="StockListContainer">
+            <ul className="StockListContainer">
                 {stockComponents};
-            </div>
+            </ul>
         );
     }
 }
