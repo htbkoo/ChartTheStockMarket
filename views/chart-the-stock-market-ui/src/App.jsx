@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './stylesheets/App.css';
 
 import ChartContainer from './components/ChartContainer.jsx';
 import StockSection from './components/StockSection.jsx';
