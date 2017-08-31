@@ -1,5 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import {Map} from 'immutable';
 import configureStore from 'redux-mock-store';
 import chai from '../test-util/chaiWithEnzyme';
 import sinon from '../test-util/sinonWithSinonTest';
@@ -13,7 +14,7 @@ describe("StockListContainer", function () {
     describe("rendering", function () {
         it("should render the connected(StockList) component", function () {
             //    given
-            let initialState = {};
+            let initialState = Map();
             let store = configureStore()(initialState);
 
             //    when
@@ -29,7 +30,7 @@ describe("StockListContainer", function () {
         it("should contain the 'stocks' props from initial state", function () {
             //    given
             const stocks = "someStock";
-            let initialState = {stocks};
+            let initialState = Map({stocks});
             let store = configureStore()(initialState);
 
             //    when
@@ -51,7 +52,12 @@ describe("StockListContainer", function () {
             onAddStock(underlyingId);
 
             //    then
-            chai.expect(dispatchSpy.calledWith(sinon.match(addStock(underlyingId)))).to.be.true;
+            // TODO: bug in at least sinon@3.2.1, unable to use sinon.match(obj) if not in jsdom environment
+            // chai.expect(dispatchSpy.calledWith(sinon.match(addStock(underlyingId)))).to.be.true;
+            chai.expect(dispatchSpy.calledWith(sinon.match(function (value) {
+                let action = addStock(underlyingId);
+                return Object.keys(action).every(key => (key in value) && (action[key] === value[key]));
+            }))).to.be.true;
         }));
     });
 });
