@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #222222;
 }
 
@@ -10,7 +10,7 @@ body{
     overflow: hidden;
 }
 
-.AppContainer{
+.AppContainer {
     background-color: #111166;
     border: solid 1px white;
     border-radius: 5px;
