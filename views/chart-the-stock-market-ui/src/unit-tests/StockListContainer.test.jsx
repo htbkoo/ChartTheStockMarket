@@ -3,6 +3,7 @@ import {shallow} from 'enzyme';
 import {Map} from 'immutable';
 import configureStore from 'redux-mock-store';
 import chai from '../test-util/chaiWithEnzyme';
+import {matchAction} from '../test-util/matchingHelper';
 import sinon from '../test-util/sinonWithSinonTest';
 
 import StockListContainer, {mapDispatchToProps} from '../components/StockListContainer.jsx';
@@ -52,12 +53,7 @@ describe("StockListContainer", function () {
             onAddStock(underlyingId);
 
             //    then
-            // TODO: bug in at least sinon@3.2.1, unable to use sinon.match(obj) if not in jsdom environment
-            // chai.expect(dispatchSpy.calledWith(sinon.match(addStock(underlyingId)))).to.be.true;
-            chai.expect(dispatchSpy.calledWith(sinon.match(function (value) {
-                let action = addStock(underlyingId);
-                return Object.keys(action).every(key => (key in value) && (action[key] === value[key]));
-            }))).to.be.true;
+            chai.expect(dispatchSpy.calledWith(matchAction(addStock(underlyingId)))).to.be.true;
         }));
     });
 });
