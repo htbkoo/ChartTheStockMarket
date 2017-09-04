@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import keycode from 'keycode';
+import {addStock} from '../redux/reduxActions';
 
 export class StockControls extends Component {
     constructor(props) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.state = {
             inputValue: ""
         }
@@ -15,12 +18,24 @@ export class StockControls extends Component {
         this.setState({inputValue: e.target.value});
     }
 
+    handleKeyPress(e) {
+        if (keycode("ENTER") === e) {
+            if (this.state.inputValue.trim()) {
+                this.props.dispatch(addStock(this.state.inputValue));
+                this.setState({
+                    inputValue: ""
+                });
+            }
+        }
+    }
+
     render() {
         return (
             <div className="StockControls">
                 <input type="text"
                        value={this.state.inputValue}
-                       onChange={this.handleChange}/>
+                       onChange={this.handleChange}
+                       onKeyPress={this.handleKeyPress}/>
                 />
             </div>
         );
