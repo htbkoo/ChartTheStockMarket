@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import keycode from 'keycode';
+import keycodeHelper from '../utils/keycodeHelper';
 import {addStock} from '../redux/reduxActions';
 
 export class StockControls extends Component {
@@ -19,7 +19,7 @@ export class StockControls extends Component {
     }
 
     handleKeyPress(e) {
-        if (keycode("ENTER") === e) {
+        if (keycodeHelper.isEnter(e)) {
             if (this.state.inputValue.trim()) {
                 this.props.dispatch(addStock(this.state.inputValue));
                 this.setState({
