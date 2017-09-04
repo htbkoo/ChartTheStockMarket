@@ -20,9 +20,42 @@ describe("keycodeHelper", function () {
         const strKeycode = "Enter";
 
         //    when
-        let expected = keycodeHelper.isEnter('Enter');
+        let expected = keycodeHelper.isEnter(strKeycode);
 
         //    then
         chai.expect(expected).to.be.true;
+    });
+
+    it("should return false for isEnter('sthElse')", function () {
+        //    given
+        const strKeycode = "sthElse";
+
+        //    when
+        let expected = keycodeHelper.isEnter(strKeycode);
+
+        //    then
+        chai.expect(expected).to.be.false;
+    });
+
+    it("should return true for isEnter(keycode('enter'))", function () {
+        //    given
+        const numKeycode = keycode("enter");
+
+        //    when
+        let expected = keycodeHelper.isEnter(numKeycode);
+
+        //    then
+        chai.expect(expected).to.be.true;
+    });
+
+    it("should return false for isEnter(keycode('space'))", function () {
+        //    given
+        const numKeycode = keycode("space");
+
+        //    when
+        let expected = keycodeHelper.isEnter(numKeycode);
+
+        //    then
+        chai.expect(expected).to.be.false;
     });
 });
