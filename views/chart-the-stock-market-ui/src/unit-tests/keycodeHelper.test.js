@@ -15,6 +15,17 @@ describe("keycodeHelper", function () {
             //    then
             chai.expect(actual).to.equal(expected);
         });
+
+        it("should expose SPACE as constant", function () {
+            //    given
+            const expected = keycode("SPACE");
+
+            //    when
+            let actual = keycodeHelper.SPACE;
+
+            //    then
+            chai.expect(actual).to.equal(expected);
+        });
     });
 
     describe("isEnter", function () {
