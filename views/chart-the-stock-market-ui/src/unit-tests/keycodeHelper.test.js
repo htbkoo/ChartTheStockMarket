@@ -18,48 +18,36 @@ describe("keycodeHelper", function () {
     });
 
     describe("isEnter", function () {
-        it("should return true for isEnter('Enter')", function () {
-            //    given
-            const strKeycode = "Enter";
+        [
+            {
+                name: "should return true for isEnter('Enter')",
+                inputParam: "Enter",
+                expected: true
+            },
+            {
+                name: "should return false for isEnter('sthElse')",
+                inputParam: "sthElse",
+                expected: false
+            },
+            {
+                name: "should return true for isEnter(keycode('enter'))",
+                inputParam: keycode("enter"),
+                expected: true
+            },
+            {
+                name: "should return false for isEnter(keycode('space'))",
+                inputParam: keycode("space"),
+                expected: false
+            }
+        ].forEach(testcase =>
+            it(testcase.name, function () {
+                //    given
+                //    when
+                let expected = keycodeHelper.isEnter(testcase.inputParam);
 
-            //    when
-            let expected = keycodeHelper.isEnter(strKeycode);
-
-            //    then
-            chai.expect(expected).to.be.true;
-        });
-
-        it("should return false for isEnter('sthElse')", function () {
-            //    given
-            const strKeycode = "sthElse";
-
-            //    when
-            let expected = keycodeHelper.isEnter(strKeycode);
-
-            //    then
-            chai.expect(expected).to.be.false;
-        });
-
-        it("should return true for isEnter(keycode('enter'))", function () {
-            //    given
-            const numKeycode = keycode("enter");
-
-            //    when
-            let expected = keycodeHelper.isEnter(numKeycode);
-
-            //    then
-            chai.expect(expected).to.be.true;
-        });
-
-        it("should return false for isEnter(keycode('space'))", function () {
-            //    given
-            const numKeycode = keycode("space");
-
-            //    when
-            let expected = keycodeHelper.isEnter(numKeycode);
-
-            //    then
-            chai.expect(expected).to.be.false;
-        });
+                //    then
+                chai.expect(expected).to.equal(testcase.expected);
+            })
+        );
     });
 });
