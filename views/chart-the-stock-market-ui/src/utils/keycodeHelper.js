@@ -1,5 +1,10 @@
 import keycode from 'keycode';
 
-export default{
-    ENTER: keycode("ENTER")
+const ENTER = keycode("ENTER");
+
+export default {
+    ENTER,
+    isEnter(primitive) {
+        return keycode(primitive)===ENTER;
+    }
 }
