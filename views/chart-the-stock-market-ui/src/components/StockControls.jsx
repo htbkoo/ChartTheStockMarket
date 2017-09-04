@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-export default class StockControls extends Component {
+export class StockControls extends Component {
     render() {
         return (
             <div className="StockControls">
@@ -9,5 +10,8 @@ export default class StockControls extends Component {
         );
     }
 }
+
+const StockControlsContainer = connect()(StockControls);
+export default StockControlsContainer;
 
 StockControls.defaultProps = {};
