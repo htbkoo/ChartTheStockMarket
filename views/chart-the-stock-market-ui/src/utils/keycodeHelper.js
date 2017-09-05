@@ -8,6 +8,6 @@ const constants = ["ENTER", "SPACE"].reduce((prev, curr) => {
 export default {
     constants,
     isEnter(primitive) {
-        return keycode(primitive) === KEYCODE_ENTER || primitive === KEYCODE_ENTER;
+        return keycode(primitive) === constants.ENTER || primitive === constants.ENTER;
     }
 }
