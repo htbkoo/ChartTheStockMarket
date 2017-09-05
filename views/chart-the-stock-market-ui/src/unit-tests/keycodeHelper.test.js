@@ -5,27 +5,21 @@ import keycodeHelper from '../utils/keycodeHelper';
 
 describe("keycodeHelper", function () {
     describe("constants", function () {
-        it("should expose ENTER as constant", function () {
-            //    given
-            const expected = keycode("ENTER");
+        [
+            "ENTER",
+            "SPACE"
+        ].forEach(constant =>
+            it(`should expose ${constant} as constant`, function () {
+                //    given
+                const expected = keycode(constant);
 
-            //    when
-            let actual = keycodeHelper.ENTER;
+                //    when
+                let actual = keycodeHelper[constant];
 
-            //    then
-            chai.expect(actual).to.equal(expected);
-        });
-
-        it("should expose SPACE as constant", function () {
-            //    given
-            const expected = keycode("SPACE");
-
-            //    when
-            let actual = keycodeHelper.SPACE;
-
-            //    then
-            chai.expect(actual).to.equal(expected);
-        });
+                //    then
+                chai.expect(actual).to.equal(expected);
+            })
+        );
     });
 
     describe("isEnter", function () {
