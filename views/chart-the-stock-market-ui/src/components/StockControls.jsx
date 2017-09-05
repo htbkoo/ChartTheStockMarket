@@ -36,7 +36,6 @@ export class StockControls extends Component {
                        value={this.state.inputValue}
                        onChange={this.handleChange}
                        onKeyPress={this.handleKeyPress}/>
-                />
             </div>
         );
     }
