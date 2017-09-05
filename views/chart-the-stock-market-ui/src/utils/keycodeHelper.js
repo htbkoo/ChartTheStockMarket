@@ -1,14 +1,12 @@
 import keycode from 'keycode';
 
-const KEYCODE_ENTER = keycode("ENTER");
-const KEYCODE_SPACE = keycode("SPACE");
-
+const constants = ["ENTER", "SPACE"].reduce((prev, curr) => {
+    prev[curr] = keycode(curr);
+    return prev;
+}, {});
 
 export default {
-    constants: {
-        ENTER: KEYCODE_ENTER,
-        SPACE: KEYCODE_SPACE,
-    },
+    constants,
     isEnter(primitive) {
         return keycode(primitive) === KEYCODE_ENTER || primitive === KEYCODE_ENTER;
     }
