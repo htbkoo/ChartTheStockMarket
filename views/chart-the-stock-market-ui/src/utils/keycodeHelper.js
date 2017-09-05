@@ -5,9 +5,13 @@ const constants = ["ENTER", "SPACE"].reduce((prev, curr) => {
     return prev;
 }, {});
 
-export default {
-    constants,
+const checks = {
     isEnter(primitive) {
         return keycode(primitive) === constants.ENTER || primitive === constants.ENTER;
     }
+};
+
+export default {
+    constants,
+    checks
 }

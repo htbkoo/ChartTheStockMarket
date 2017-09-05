@@ -22,37 +22,39 @@ describe("keycodeHelper", function () {
         );
     });
 
-    describe("isEnter", function () {
-        [
-            {
-                name: "should return true for isEnter('Enter')",
-                inputParam: "Enter",
-                expected: true
-            },
-            {
-                name: "should return false for isEnter('sthElse')",
-                inputParam: "sthElse",
-                expected: false
-            },
-            {
-                name: "should return true for isEnter(keycode('enter'))",
-                inputParam: keycode("enter"),
-                expected: true
-            },
-            {
-                name: "should return false for isEnter(keycode('space'))",
-                inputParam: keycode("space"),
-                expected: false
-            }
-        ].forEach(testcase =>
-            it(testcase.name, function () {
-                //    given
-                //    when
-                let expected = keycodeHelper.isEnter(testcase.inputParam);
+    describe("checks", function () {
+        describe("isEnter", function () {
+            [
+                {
+                    name: "should return true for isEnter('Enter')",
+                    inputParam: "Enter",
+                    expected: true
+                },
+                {
+                    name: "should return false for isEnter('sthElse')",
+                    inputParam: "sthElse",
+                    expected: false
+                },
+                {
+                    name: "should return true for isEnter(keycode('enter'))",
+                    inputParam: keycode("enter"),
+                    expected: true
+                },
+                {
+                    name: "should return false for isEnter(keycode('space'))",
+                    inputParam: keycode("space"),
+                    expected: false
+                }
+            ].forEach(testcase =>
+                it(testcase.name, function () {
+                    //    given
+                    //    when
+                    let expected = keycodeHelper.checks.isEnter(testcase.inputParam);
 
-                //    then
-                chai.expect(expected).to.equal(testcase.expected);
-            })
-        );
+                    //    then
+                    chai.expect(expected).to.equal(testcase.expected);
+                })
+            );
+        });
     });
 });

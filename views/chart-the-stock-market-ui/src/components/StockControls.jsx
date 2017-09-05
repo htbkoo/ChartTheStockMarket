@@ -19,7 +19,7 @@ export class StockControls extends Component {
     }
 
     handleKeyPress(e) {
-        if (keycodeHelper.isEnter(e)) {
+        if (keycodeHelper.checks.isEnter(e)) {
             if (this.state.inputValue.trim()) {
                 this.props.dispatch(addStock(this.state.inputValue));
                 this.setState({
