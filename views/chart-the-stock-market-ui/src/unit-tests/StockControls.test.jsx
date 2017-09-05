@@ -4,7 +4,7 @@ import chai from '../test-util/chaiWithEnzyme';
 import storeHelper from '../test-util/reduxStoreHelper';
 import {matchAction} from '../test-util/matchingHelper';
 import {addStock} from '../redux/reduxActions';
-import keycode from 'keycode';
+import keycodeHelper from '../utils/keycodeHelper'
 import sinon from '../test-util/sinonWithSinonTest';
 
 import StockControlsContainer, {StockControls} from '../components/StockControls.jsx';
@@ -58,7 +58,7 @@ describe("StockControls", function () {
         wrapper.setState({inputValue: underlyingId});
 
         // when
-        getInput().simulate("keyPress", keycode("ENTER"));
+        getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
 
         // then
         chai.expect(dispatchSpy.calledWith(matchAction(addStock(underlyingId)))).to.be.true;
@@ -74,7 +74,7 @@ describe("StockControls", function () {
         wrapper.setState({inputValue: underlyingId});
 
         // when
-        getInput().simulate("keyPress", keycode("SPACE"));
+        getInput().simulate("keyPress", keycodeHelper.constants.SPACE);
 
         // then
         chai.expect(dispatchSpy.notCalled).to.be.true;
@@ -88,7 +88,7 @@ describe("StockControls", function () {
         let getInput = () => wrapper.find('input');
 
         // when
-        getInput().simulate("keyPress", keycode("ENTER"));
+        getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
 
         // then
         chai.expect(dispatchSpy.notCalled).to.be.true;
