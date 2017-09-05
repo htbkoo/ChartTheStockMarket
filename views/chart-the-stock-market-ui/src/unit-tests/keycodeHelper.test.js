@@ -14,7 +14,7 @@ describe("keycodeHelper", function () {
                 const expected = keycode(constant);
 
                 //    when
-                let actual = keycodeHelper[constant];
+                let actual = keycodeHelper.constants[constant];
 
                 //    then
                 chai.expect(actual).to.equal(expected);
