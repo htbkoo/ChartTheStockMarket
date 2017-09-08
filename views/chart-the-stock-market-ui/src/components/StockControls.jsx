@@ -8,7 +8,7 @@ export class StockControls extends Component {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
         this.state = {
             inputValue: ""
         }
@@ -18,7 +18,7 @@ export class StockControls extends Component {
         this.setState({inputValue: e.target.value});
     }
 
-    handleKeyPress(e) {
+    handleKeyUp(e) {
         if (keycodeHelper.checks.isEnter(e)) {
             if (this.state.inputValue.trim()) {
                 this.props.dispatch(addStock(this.state.inputValue));
@@ -35,7 +35,7 @@ export class StockControls extends Component {
                 <input type="text"
                        value={this.state.inputValue}
                        onChange={this.handleChange}
-                       onKeyPress={this.handleKeyPress}/>
+                       onKeyUp={this.handleKeyUp}/>
             </div>
         );
     }

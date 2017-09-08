@@ -49,7 +49,7 @@ describe("StockControls", function () {
         chai.expect(getInput()).to.have.prop("value", underlyingId);
     }));
 
-    it('should, onKeyPress and key is ENTER, trigger onAddStock(text)', sinon.test(function () {
+    it('should, onKeyUp and key is ENTER, trigger onAddStock(text)', sinon.test(function () {
         // given
         const dispatchSpy = this.spy();
         const underlyingId = "someText";
@@ -59,14 +59,14 @@ describe("StockControls", function () {
         this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.ENTER).returns(true);
 
         // when
-        getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
+        getInput().simulate("keyUp", keycodeHelper.constants.ENTER);
 
         // then
         chai.expect(dispatchSpy.calledWith(matchAction(addStock(underlyingId)))).to.be.true;
         chai.expect(wrapper).to.have.state('inputValue', "");
     }));
 
-    it('should, onKeyPress and key is not ENTER, trigger onAddStock(text)', sinon.test(function () {
+    it('should, onKeyUp and key is not ENTER, trigger onAddStock(text)', sinon.test(function () {
         // given
         const dispatchSpy = this.spy();
         const underlyingId = "someText";
@@ -76,7 +76,7 @@ describe("StockControls", function () {
         this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.SPACE).returns(false);
 
         // when
-        getInput().simulate("keyPress", keycodeHelper.constants.SPACE);
+        getInput().simulate("keyUp", keycodeHelper.constants.SPACE);
 
         // then
         chai.expect(dispatchSpy.notCalled).to.be.true;
@@ -91,7 +91,7 @@ describe("StockControls", function () {
         this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.ENTER).returns(true);
 
         // when
-        getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
+        getInput().simulate("keyUp", keycodeHelper.constants.ENTER);
 
         // then
         chai.expect(dispatchSpy.notCalled).to.be.true;
