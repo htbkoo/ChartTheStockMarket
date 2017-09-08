@@ -49,13 +49,14 @@ describe("StockControls", function () {
         chai.expect(getInput()).to.have.prop("value", underlyingId);
     }));
 
-    it('should, onKeyPress(keycode(ENTER)), trigger onAddStock(text)', sinon.test(function () {
+    it('should, onKeyPress and key is ENTER, trigger onAddStock(text)', sinon.test(function () {
         // given
         const dispatchSpy = this.spy();
         const underlyingId = "someText";
         let wrapper = shallow(<StockControls dispatch={dispatchSpy}/>);
         let getInput = () => wrapper.find('input');
         wrapper.setState({inputValue: underlyingId});
+        this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.ENTER).returns(true);
 
         // when
         getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
@@ -65,13 +66,14 @@ describe("StockControls", function () {
         chai.expect(wrapper).to.have.state('inputValue', "");
     }));
 
-    it('should, onKeyPress(other)), not trigger onAddStock(text)', sinon.test(function () {
+    it('should, onKeyPress and key is not ENTER, trigger onAddStock(text)', sinon.test(function () {
         // given
         const dispatchSpy = this.spy();
         const underlyingId = "someText";
         let wrapper = shallow(<StockControls dispatch={dispatchSpy}/>);
         let getInput = () => wrapper.find('input');
         wrapper.setState({inputValue: underlyingId});
+        this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.SPACE).returns(false);
 
         // when
         getInput().simulate("keyPress", keycodeHelper.constants.SPACE);
@@ -86,6 +88,7 @@ describe("StockControls", function () {
         const underlyingId = "someText";
         let wrapper = shallow(<StockControls dispatch={dispatchSpy}/>);
         let getInput = () => wrapper.find('input');
+        this.stub(keycodeHelper.checks, "isEnter").withArgs(keycodeHelper.constants.ENTER).returns(true);
 
         // when
         getInput().simulate("keyPress", keycodeHelper.constants.ENTER);
