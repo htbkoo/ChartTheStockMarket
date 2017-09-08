@@ -49,10 +49,10 @@ describe("keycodeHelper", function () {
                 it(testcase.name, function () {
                     //    given
                     //    when
-                    let expected = keycodeHelper.checks.isEnter(testcase.inputParam);
+                    let actual = keycodeHelper.checks.isEnter(testcase.inputParam);
 
                     //    then
-                    chai.expect(expected).to.equal(testcase.expected);
+                    chai.expect(actual).to.equal(testcase.expected);
                 })
             );
         });
