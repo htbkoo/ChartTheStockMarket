@@ -9,9 +9,11 @@ describe("mount test - keycodeHelper", function () {
 
         it("should return true for isEnter(mockEnterEvent)", function () {
             //    given
-            // Unable to create an Event as specified by keycode (https://www.npmjs.com/package/keycode#keycodekeycodeevent)
-            // Thus mocking with rewire in this way
-            let enterEvent = $(global.window).Event("keyup");
+            // Temporary fix for the 2 situations (jsdom environment vs node environment)
+            let jquerySelector = 'Event' in $ ? $ : $(global.window);
+
+            // Creating a keyup Event by jquery, as this is the actual use case in keycode (https://www.npmjs.com/package/keycode#keycodekeycodeevent)
+            let enterEvent = jquerySelector.Event("keyup");
             enterEvent.which = 13;
             enterEvent.keyCode = 13;
 
