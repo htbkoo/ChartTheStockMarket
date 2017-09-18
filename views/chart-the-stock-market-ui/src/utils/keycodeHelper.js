@@ -7,7 +7,7 @@ const constants = ["ENTER", "SPACE"].reduce((prev, curr) => {
 
 const checks = {
     isEnter(primitive) {
-        return keycode(primitive) === constants.ENTER || primitive === constants.ENTER;
+        return keycode(keycode(primitive)) === constants.ENTER || keycode(primitive) === constants.ENTER || primitive === constants.ENTER;
     }
 };
 
