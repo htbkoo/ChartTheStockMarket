@@ -1,3 +1,16 @@
-.StockListContainer li {
+.Stock {
     color: white;
+    margin: 15px;
+}
+
+.StockControls {
+    margin: 15px;
+}
+
+.StockListContainer {
+    display: flex;
+}
+
+.StockSection {
+    display: flex;
 }

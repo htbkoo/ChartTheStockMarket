@@ -15,5 +15,6 @@ body {
     border: solid 1px white;
     border-radius: 5px;
     margin: 3%;
+    padding: 3%;
     height: 80vh;
 }
