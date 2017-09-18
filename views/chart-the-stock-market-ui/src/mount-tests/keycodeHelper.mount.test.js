@@ -3,10 +3,10 @@ import $ from 'jquery';
 
 import keycodeHelper from '../utils/keycodeHelper';
 
-require('./setup.jsx');
-
 describe("mount test - keycodeHelper", function () {
     describe("for Event Case (with rewire)", function () {
+        beforeEach(() => require('./setup.jsx'));
+
         it("should return true for isEnter(mockEnterEvent)", function () {
             //    given
             // Unable to create an Event as specified by keycode (https://www.npmjs.com/package/keycode#keycodekeycodeevent)

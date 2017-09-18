@@ -6,9 +6,9 @@ import configureStore from 'redux-mock-store';
 
 import App from '../App.jsx';
 
-require('./setup.jsx');
-
 describe("mount test - App", function () {
+    beforeEach(() => require('./setup.jsx'));
+
     it('renders with a mock store without crashing', () => {
         let initialState = Map({stocks: List()});
         mount(
