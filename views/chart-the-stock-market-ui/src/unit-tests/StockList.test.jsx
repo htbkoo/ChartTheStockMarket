@@ -19,11 +19,7 @@ describe("StockList", function () {
         assertNumberOfStockIn(wrapper).to.be(stocks.length);
         wrapper.find("div").find(DisplayFrame).forEach(
             (component, key) => {
-                let x = component.prop('child');
-
-                chai.expect(component).to.have.prop('child').deep.equal((
-                    <Stock stock={stocks[key]}/>
-                ));
+                chai.expect(component).to.have.prop('child').deep.equal(<Stock stock={stocks[key]}/>);
                 chai.expect(component).to.have.prop('className').deep.equal("StockDisplayFrame");
             }
         );

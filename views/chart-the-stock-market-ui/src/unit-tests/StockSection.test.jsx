@@ -22,7 +22,7 @@ describe("StockSection", function () {
         ])).to.be.true;
 
         let displayFrameComponent = wrapper.find(DisplayFrame);
-        chai.expect(displayFrameComponent).to.have.prop('child').deep.equal(<StockControls />);
+        chai.expect(displayFrameComponent).to.have.prop('child').deep.equal(<StockControls/>);
         chai.expect(displayFrameComponent).to.have.prop('className', "StockDisplayFrame");
     });
 });
