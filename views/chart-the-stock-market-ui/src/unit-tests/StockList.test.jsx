@@ -21,7 +21,12 @@ describe("StockList", function () {
         chai.expect(displayFrameComponents.length).to.equal(stocks.length);
         displayFrameComponents.forEach(
             (component, key) => {
-                chai.expect(component).to.have.prop('child').deep.equal(stocks[key]);
+                let x = component.prop('child');
+
+                chai.expect(component).to.have.prop('child').deep.equal((
+                    <Stock stock={stocks[key]}/>
+                ));
+                // chai.expect(component.prop('child')).to.have.prop('child').deep.equal(stocks[key]);
                 chai.expect(component).to.have.prop('className').deep.equal("StockDisplayFrame");
             }
         );
