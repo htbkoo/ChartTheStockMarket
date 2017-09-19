@@ -16,9 +16,8 @@ describe("StockList", function () {
         let wrapper = shallow(<StockList stocks={stocks}/>);
 
         // then
-        let displayFrameComponents = wrapper.find("div").find(DisplayFrame);
-        chai.expect(displayFrameComponents.length).to.equal(stocks.length);
-        displayFrameComponents.forEach(
+        assertNumberOfStockIn(wrapper).to.be(stocks.length);
+        wrapper.find("div").find(DisplayFrame).forEach(
             (component, key) => {
                 let x = component.prop('child');
 
@@ -53,7 +52,7 @@ describe("StockList", function () {
     function assertNumberOfStockIn(wrapper) {
         return {
             "to": {
-                "be": size => chai.expect(wrapper.find(Stock).length).to.equal(size)
+                "be": size => chai.expect(wrapper.find("div").find(DisplayFrame).length).to.equal(size)
             }
         }
     }
