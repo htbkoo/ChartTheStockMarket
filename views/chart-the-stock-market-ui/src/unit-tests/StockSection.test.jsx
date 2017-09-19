@@ -6,9 +6,10 @@ import StockSection from '../components/StockSection.jsx';
 
 import StockListContainer from '../components/StockListContainer.jsx';
 import StockControls from '../components/StockControls.jsx';
+import DisplayFrame from '../components/DisplayFrame.jsx';
 
 describe("StockSection", function () {
-    it('should have a <StockListContainer /> and <StockControls /> in <StockSection />', () => {
+    it('should have a <StockListContainer /> and <DisplayFrame child={<StockControls />}/> in <StockSection />', () => {
         // given
 
         // when
@@ -17,7 +18,11 @@ describe("StockSection", function () {
         // then
         chai.expect(wrapper.containsAllMatchingElements([
             <StockListContainer/>,
-            <StockControls/>,
+            <DisplayFrame/>,
         ])).to.be.true;
+
+        let displayFrameComponent = wrapper.find(DisplayFrame);
+        chai.expect(displayFrameComponent).to.have.prop('child').deep.equal(<StockControls />);
+        chai.expect(displayFrameComponent).to.have.prop('className', "StockDisplayFrame");
     });
 });
