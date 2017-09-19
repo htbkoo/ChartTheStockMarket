@@ -16,7 +16,6 @@ describe("StockList", function () {
         let wrapper = shallow(<StockList stocks={stocks}/>);
 
         // then
-        // assertNumberOfStockIn(wrapper).to.be(2);
         let displayFrameComponents = wrapper.find("div").find(DisplayFrame);
         chai.expect(displayFrameComponents.length).to.equal(stocks.length);
         displayFrameComponents.forEach(
@@ -26,7 +25,6 @@ describe("StockList", function () {
                 chai.expect(component).to.have.prop('child').deep.equal((
                     <Stock stock={stocks[key]}/>
                 ));
-                // chai.expect(component.prop('child')).to.have.prop('child').deep.equal(stocks[key]);
                 chai.expect(component).to.have.prop('className').deep.equal("StockDisplayFrame");
             }
         );
