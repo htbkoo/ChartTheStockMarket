@@ -5,15 +5,15 @@ import chai from '../test-util/chaiWithEnzyme';
 import Stock from '../components/Stock.jsx';
 
 describe("Stock", function () {
-    it('should have child <li>{props.stock}</li>', () => {
+    it('should have child <div>{props.stock}</div>', () => {
         // given
         let stock = "stock";
 
         // when
         let stockComponent = shallow(<Stock stock={stock}/>);
-        let li = stockComponent.find('li');
+        let div = stockComponent.find('div');
 
         // then
-        chai.expect(li).to.have.text(stock);
+        chai.expect(div).to.have.text(stock);
     });
 });
