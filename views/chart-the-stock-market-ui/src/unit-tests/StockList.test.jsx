@@ -5,9 +5,10 @@ import chai from '../test-util/chaiWithEnzyme';
 import StockList from '../components/StockList.jsx';
 
 import Stock from '../components/Stock.jsx';
+import DisplayFrame from '../components/DisplayFrame.jsx';
 
 describe("StockList", function () {
-    it('should have a list of <Stock/> in <StockList stocks/>', () => {
+    it('should have a list of <DisplayFrame/> with child=stock and className=StockDisplayFrame in <StockList stocks/>', () => {
         // given
         let stocks = [{"name": "A"}, {"name": "B"}];
 
@@ -15,11 +16,14 @@ describe("StockList", function () {
         let wrapper = shallow(<StockList stocks={stocks}/>);
 
         // then
-        assertNumberOfStockIn(wrapper).to.be(2);
-        let stockComponents = wrapper.find("ul").find(Stock);
-        stockComponents.forEach(
-            (component, key) =>
-                chai.expect(component).to.have.prop('stock').deep.equal(stocks[key])
+        // assertNumberOfStockIn(wrapper).to.be(2);
+        let displayFrameComponents = wrapper.find("div").find(DisplayFrame);
+        chai.expect(displayFrameComponents.length).to.equal(stocks.length);
+        displayFrameComponents.forEach(
+            (component, key) => {
+                chai.expect(component).to.have.prop('child').deep.equal(stocks[key]);
+                chai.expect(component).to.have.prop('className').deep.equal("StockDisplayFrame");
+            }
         );
     });
 
@@ -46,7 +50,7 @@ describe("StockList", function () {
     function assertNumberOfStockIn(wrapper) {
         return {
             "to": {
-                "be": size => chai.expect(wrapper.find("ul").find(Stock).length).to.equal(size)
+                "be": size => chai.expect(wrapper.find(Stock).length).to.equal(size)
             }
         }
     }

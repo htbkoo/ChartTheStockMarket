@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import '../stylesheets/StockList.css';
 
-import Stock from './Stock';
+import DisplayFrame from './DisplayFrame';
 
 export default class StockList extends Component {
     render() {
-        let stockComponents = this.props.stocks.map((stock, key) => (<Stock stock={stock} key={key}/>));
+        let stockComponents = this.props.stocks.map((stock, key) => (
+            <DisplayFrame child={stock} className="StockDisplayFrame" key={key}/>
+        ));
 
         return (
-            <ul className="StockListContainer">
-                {stockComponents};
-            </ul>
+            <div className="StockListContainer">
+                {stockComponents}
+            </div>
         );
     }
 }
