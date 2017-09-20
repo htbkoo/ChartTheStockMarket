@@ -9,7 +9,7 @@ import sinon from '../test-util/sinonWithSinonTest';
 import StockListContainer, {mapDispatchToProps} from '../components/StockListContainer.jsx';
 
 import StockList from '../components/StockList.jsx';
-import {addStock} from '../redux/reduxActions';
+import {removeStock} from '../redux/reduxActions';
 
 describe("StockListContainer", function () {
     describe("rendering", function () {
@@ -43,17 +43,17 @@ describe("StockListContainer", function () {
     });
 
     describe("dispatch", function () {
-        it("should dispatch onAddStock to actions.addStock", sinon.test(function () {
+        it("should dispatch onRemoveStock to actions.removeStock", sinon.test(function () {
             //    given
             const underlyingId = "id";
             let dispatchSpy = this.spy();
 
             //    when
-            let {onAddStock} = mapDispatchToProps(dispatchSpy);
-            onAddStock(underlyingId);
+            let {onRemoveStock} = mapDispatchToProps(dispatchSpy);
+            onRemoveStock(underlyingId);
 
             //    then
-            chai.expect(dispatchSpy.calledWith(matchAction(addStock(underlyingId)))).to.be.true;
+            chai.expect(dispatchSpy.calledWith(matchAction(removeStock(underlyingId)))).to.be.true;
         }));
     });
 });

@@ -7,9 +7,9 @@ const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-    "onAddStock": underlyingId => {
-        console.log("onAddStock called with: " + underlyingId);
-        dispatch(actions.addStock(underlyingId));
+    "onRemoveStock": underlyingId => {
+        console.log("onRemoveStock called with: " + underlyingId);
+        dispatch(actions.removeStock(underlyingId));
     }
 });
 
