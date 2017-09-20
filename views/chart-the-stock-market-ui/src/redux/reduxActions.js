@@ -6,3 +6,10 @@ export function addStock(underlyingId){
         underlyingId
     }
 }
+
+export function removeStock(underlyingId){
+    return {
+        type: types.REMOVE_STOCK,
+        underlyingId
+    }
+}

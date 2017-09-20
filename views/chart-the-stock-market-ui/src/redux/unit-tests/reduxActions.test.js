@@ -18,4 +18,19 @@ describe("reduxActions", function () {
         //    then
         chai.expect(addStockAction).to.deep.equal(expectedAction);
     });
+
+    it("should create an action to remove a stock", function () {
+        //    given
+        const underlyingId = "GGGG.OQ";
+        const expectedAction = {
+            type: types.REMOVE_STOCK,
+            underlyingId
+        };
+
+        //    when
+        let removeStockAction = actions.removeStock(underlyingId);
+
+        //    then
+        chai.expect(removeStockAction).to.deep.equal(expectedAction);
+    });
 });
