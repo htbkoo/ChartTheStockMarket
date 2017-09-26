@@ -9,7 +9,9 @@ export default class StockSection extends Component {
         return (
             <div className="StockSection">
                 <StockListContainer/>
-                <DisplayFrame child={<StockControls/>} className="StockDisplayFrame"/>
+                <DisplayFrame className="StockDisplayFrame">
+                    <StockControls/>
+                </DisplayFrame>
             </div>
         );
     }
