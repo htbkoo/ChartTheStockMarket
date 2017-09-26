@@ -4,7 +4,7 @@ export default class Frame extends Component {
     render() {
         return (
             <div className={this.props.className}>
-                {this.props.child}
+                {this.props.children}
             </div>
         );
     }
