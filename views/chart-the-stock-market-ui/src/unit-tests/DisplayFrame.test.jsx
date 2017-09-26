@@ -18,8 +18,7 @@ describe("DisplayFrame", function () {
         let div = displayFrameComponent.find('div');
 
         // then
-        //TODO: confirm "containMatchingElement" is correct
-        chai.expect(div).to.containMatchingElement(child);
+        chai.expect(div).to.contain(child);
     });
 
     it('should have className=props.className on <div/>', () => {
@@ -30,7 +29,6 @@ describe("DisplayFrame", function () {
         let div = displayFrameComponent.find('div');
 
         // then
-        //TODO: confirm "containMatchingElement" is correct
         chai.expect(div).to.have.prop("className", "someFrame");
     });
 });
