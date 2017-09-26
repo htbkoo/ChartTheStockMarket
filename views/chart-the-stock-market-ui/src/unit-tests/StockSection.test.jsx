@@ -18,11 +18,11 @@ describe("StockSection", function () {
         // then
         chai.expect(wrapper.containsAllMatchingElements([
             <StockListContainer/>,
-            <DisplayFrame/>,
-        ])).to.be.true;
+        ])).to.equal(true, "<StockSection/> should conatins <StockListContainer/>");
 
         let displayFrameComponent = wrapper.find(DisplayFrame);
-        chai.expect(displayFrameComponent).to.have.prop('child').deep.equal(<StockControls/>);
+        chai.expect(displayFrameComponent).to.have.length(1);
+        chai.expect(displayFrameComponent).to.contain(<StockControls/>);
         chai.expect(displayFrameComponent).to.have.prop('className', "StockDisplayFrame");
     });
 });
