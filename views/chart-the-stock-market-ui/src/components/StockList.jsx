@@ -7,7 +7,7 @@ import DisplayFrame from './DisplayFrame';
 export default class StockList extends Component {
     render() {
         let stockComponents = this.props.stocks.map((stock, key) => (
-            <DisplayFrame child={<Stock stock={stock}/>} className="StockDisplayFrame" key={key}/>
+            <DisplayFrame child={<Stock stock={stock} onRemoveStock={this.props.onRemoveStock}/>} className="StockDisplayFrame" key={key}/>
         ));
 
         return (

@@ -8,18 +8,18 @@ import Stock from '../components/Stock.jsx';
 import DisplayFrame from '../components/DisplayFrame.jsx';
 
 describe("StockList", function () {
-    it('should have a list of <DisplayFrame/> with child=stock and className=StockDisplayFrame in <StockList stocks/>', () => {
+    it('should have a list of <DisplayFrame/> with onRemoveStock, child=stock and className=StockDisplayFrame in <StockList stocks/>', () => {
         // given
-        let stocks = [{"name": "A"}, {"name": "B"}];
+        let stocks = [{"name": "A"}, {"name": "B"}], mockOnRemoveStock = "mockFunction";
 
         // when
-        let wrapper = shallow(<StockList stocks={stocks}/>);
+        let wrapper = shallow(<StockList stocks={stocks} onRemoveStock={mockOnRemoveStock}/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(stocks.length);
         wrapper.find("div").find(DisplayFrame).forEach(
             (component, key) => {
-                chai.expect(component).to.have.prop('child').deep.equal(<Stock stock={stocks[key]}/>);
+                chai.expect(component).to.have.prop('child').deep.equal(<Stock stock={stocks[key]} onRemoveStock={mockOnRemoveStock}/>);
                 chai.expect(component).to.have.prop('className').deep.equal("StockDisplayFrame");
             }
         );
