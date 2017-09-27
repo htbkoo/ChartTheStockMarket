@@ -29,4 +29,25 @@ describe("Stock", function () {
         chai.expect(buttonComponent).to.have.length(1);
         chai.expect(buttonComponent).to.have.className("close");
     });
+
+    it('should have child <button onClick={this.props.onRemoveStock}> ', () => {
+        return new Promise(resolve => {
+            // given
+            let stock = "stock";
+            let mockOnRemoveStock = stockId=>{
+                chai.expect(stockId).to.equal(stock);
+                resolve();
+            };
+
+            // when
+            let stockComponent = shallow(<Stock stock={stock} onRemoveStock={mockOnRemoveStock}/>);
+            let buttonComponent = stockComponent.find('button');
+
+            // then
+            chai.expect(buttonComponent).to.have.length(1);
+            chai.expect(buttonComponent).to.have.className("close");
+
+            buttonComponent.simulate('click');
+        })
+    });
 });
