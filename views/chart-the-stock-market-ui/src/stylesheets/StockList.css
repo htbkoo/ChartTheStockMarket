@@ -19,5 +19,7 @@
 }
 
 .StockControls input{
-    border-radius: 25px;
+    border-radius: 10px;
+    background-color: #666;
+    color: white;
 }
