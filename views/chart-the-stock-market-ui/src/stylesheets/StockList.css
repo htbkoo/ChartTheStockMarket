@@ -18,8 +18,35 @@
     display: flex;
 }
 
-.StockControls input{
+.StockControls input {
     border-radius: 10px;
     background-color: #666;
     color: white;
+}
+
+.Stock {
+    position: relative;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+
+    position: absolute;
+    top: -16px;
+    right: -12px;
+    color: inherit;
+    font-size: large;
 }
