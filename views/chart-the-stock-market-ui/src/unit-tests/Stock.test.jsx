@@ -33,8 +33,9 @@ describe("Stock", function () {
     it('should have child <button onClick={this.props.onRemoveStock}> ', () => {
         return new Promise(resolve => {
             // given
-            let stock = "stock";
-            let mockOnRemoveStock = stockId=>{
+            let stock = "stock", isClicking = false;
+            let mockOnRemoveStock = stockId => {
+                chai.expect(isClicking).to.equal(true, "should be triggered by click");
                 chai.expect(stockId).to.equal(stock);
                 resolve();
             };
@@ -47,6 +48,7 @@ describe("Stock", function () {
             chai.expect(buttonComponent).to.have.length(1);
             chai.expect(buttonComponent).to.have.className("close");
 
+            isClicking = true;
             buttonComponent.simulate('click');
         })
     });
