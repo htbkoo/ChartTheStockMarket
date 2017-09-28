@@ -1263,9 +1263,9 @@ chai-enzyme@^0.8.0:
     html "^1.0.0"
     react-element-to-jsx-string "^5.0.0"
 
-chai-immutable@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/chai-immutable/-/chai-immutable-1.6.0.tgz#9ec00bdd67948b13b20fcbb89cbf4af2ce6f9247"
+chai-immutable@next:
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/chai-immutable/-/chai-immutable-2.0.0-alpha.1.tgz#0e0f3ae9cc09208188f94392c5fd6ecbd4e65d75"
 
 chai@^4.1.1:
   version "4.1.1"
