@@ -33,4 +33,20 @@ describe("reduxActions", function () {
         //    then
         chai.expect(removeStockAction).to.deep.equal(expectedAction);
     });
+
+    it("should create an action to reorder a stock", function () {
+        //    given
+        const underlyingId = "GGGG.OQ", newPosition = 3;
+        const expectedAction = {
+            type: types.REORDER_STOCK,
+            underlyingId,
+            newPosition,
+        };
+
+        //    when
+        let reorderStockAction = actions.reorderStock(underlyingId, newPosition);
+
+        //    then
+        chai.expect(reorderStockAction).to.deep.equal(expectedAction);
+    });
 });

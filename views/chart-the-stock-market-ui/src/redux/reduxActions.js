@@ -13,3 +13,11 @@ export function removeStock(underlyingId){
         underlyingId
     }
 }
+
+export function reorderStock(underlyingId, newPosition){
+    return {
+        type: types.REORDER_STOCK,
+        underlyingId,
+        newPosition
+    }
+}
