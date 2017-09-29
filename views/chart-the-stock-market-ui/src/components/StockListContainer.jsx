@@ -10,7 +10,11 @@ export const mapDispatchToProps = dispatch => ({
     "onRemoveStock": underlyingId => {
         console.log("onRemoveStock called with: " + underlyingId);
         dispatch(actions.removeStock(underlyingId));
-    }
+    },
+    "onReorderStock": (underlyingId, newPosition) => {
+        console.log("onReorderStock called with: " + [underlyingId, newPosition]);
+        dispatch(actions.reorderStock(underlyingId, newPosition));
+    },
 });
 
 const StockListContainer = connect(
