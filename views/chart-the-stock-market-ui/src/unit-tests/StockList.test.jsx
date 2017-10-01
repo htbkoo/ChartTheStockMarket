@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 import StockList from '../components/StockList.jsx';
 
@@ -11,7 +11,7 @@ import DisplayFrame from '../components/DisplayFrame.jsx';
 describe("StockList", function () {
     it('should have a list of <DisplayFrame/> with onRemoveStock, child=stock and className=StockDisplayFrame in <StockList stocks/>', () => {
         // given
-        let stocks = List([{"name": "A"}, {"name": "B"}]), mockOnRemoveStock = "mockFunction";
+        let stocks = List([Map({"name": "A"}), Map({"name": "B"})]), mockOnRemoveStock = "mockFunction";
 
         // when
         let wrapper = shallow(<StockList stocks={stocks} onRemoveStock={mockOnRemoveStock}/>);
