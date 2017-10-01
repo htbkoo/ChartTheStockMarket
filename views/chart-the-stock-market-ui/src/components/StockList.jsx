@@ -1,6 +1,7 @@
 import '../stylesheets/StockList.css';
 
 import React, {Component} from 'react';
+import propTypes from 'prop-types';
 
 import Stock from './Stock';
 import DisplayFrame from './DisplayFrame';
@@ -20,6 +21,10 @@ export default class StockList extends Component {
         );
     }
 }
+
+StockList.propTypes = {
+    stock: propTypes.array.isRequired
+};
 
 StockList.defaultProps = {
     stocks: []
