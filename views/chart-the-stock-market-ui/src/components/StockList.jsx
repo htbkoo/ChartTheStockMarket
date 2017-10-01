@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
 import '../stylesheets/StockList.css';
+
+import React, {Component} from 'react';
 
 import Stock from './Stock';
 import DisplayFrame from './DisplayFrame';
@@ -14,7 +15,7 @@ export default class StockList extends Component {
 
         return (
             <div className="StockListContainer">
-                {stockComponents}
+                {stockComponents.toArray()}
             </div>
         );
     }
