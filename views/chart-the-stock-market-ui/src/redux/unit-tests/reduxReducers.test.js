@@ -114,6 +114,45 @@ describe("reduxReducers", function () {
         );
     });
 
+    describe("reorderStock", function () {
+        [
+            {
+                name: "should handle REORDER_STOCK for uninitialized stat",
+                params: {
+                    state: undefined,
+                    action: createReorderAction().from(0).to(0)
+                },
+                expectedState: createImmutableState().withStocks([])
+            },
+            {
+                name: "should handle REORDER_STOCK for unmatched case",
+                params: {
+                    state: createImmutableState().withStocks(["anotherId"]),
+                    action: createReorderAction().from(0).to(1)
+                },
+                expectedState: createImmutableState().withStocks(["anotherId"])
+            },
+            {
+                name: "should handle REORDER_STOCK for moving from 0 to 1",
+                params: {
+                    state: createImmutableState().withStocks(["someId0","someId1"]),
+                    action: createReorderAction().from(0).to(1)
+                },
+                expectedState: createImmutableState().withStocks(["someId1","someId0"])
+            },
+            {
+                name: "should handle REORDER_STOCK for moving from 4 to 2",
+                params: {
+                    state: createImmutableState().withStocks(["i0","i1","i2","i3","i4","i5",]),
+                    action: createReorderAction().from(4).to(2)
+                },
+                expectedState: createImmutableState().withStocks(["i0","i1","i4","i2","i3","i5",])
+            },
+        ].forEach(testCase =>
+            it(testCase.name, testReducer(testCase))
+        );
+    });
+
     function testReducer(testCase) {
         return function () {
             //    given
@@ -155,6 +194,22 @@ describe("reduxReducers", function () {
                 return Map({
                     stocks: List(stocks)
                 });
+            }
+        };
+    }
+
+    function createReorderAction() {
+        return {
+            from(oldIndex) {
+                return {
+                    to(newIndex){
+                        return {
+                            type: types.REORDER_STOCK,
+                            oldIndex,
+                            newIndex
+                        }
+                    }
+                }
             }
         };
     }

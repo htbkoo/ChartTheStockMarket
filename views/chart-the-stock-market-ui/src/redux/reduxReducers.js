@@ -22,7 +22,19 @@ export default function stocks(state = initialState, action) {
             }
             return state;
         }
+        case types.REORDER_STOCK: {
+            let {oldIndex, newIndex} = action;
+            if (isWithinRange(oldIndex) && isWithinRange(newIndex)) {
+                let reorderedId = stateStocks.get(oldIndex);
+                return state.set('stocks', stateStocks.delete(oldIndex).insert(newIndex, reorderedId));
+            }
+            return state;
+        }
         default:
             return state;
+    }
+
+    function isWithinRange(index) {
+        return index < stateStocks.size;
     }
 }
