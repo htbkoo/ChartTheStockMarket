@@ -58,15 +58,15 @@ describe("StockListContainer", function () {
 
         it("should dispatch onReorderStock to actions.reorderStock", sinon.test(function () {
             //    given
-            const underlyingId = "id", newPosition = 3;
+            const oldIndex = 0, newIndex = 3;
             let dispatchSpy = this.spy();
 
             //    when
             let {onReorderStock} = mapDispatchToProps(dispatchSpy);
-            onReorderStock(underlyingId, newPosition);
+            onReorderStock(oldIndex, newIndex);
 
             //    then
-            chai.expect(dispatchSpy.calledWith(matchAction(reduxActions.reorderStock(underlyingId, newPosition)))).to.be.true;
+            chai.expect(dispatchSpy.calledWith(matchAction(reduxActions.reorderStock(oldIndex, newIndex)))).to.be.true;
         }));
     });
 });
