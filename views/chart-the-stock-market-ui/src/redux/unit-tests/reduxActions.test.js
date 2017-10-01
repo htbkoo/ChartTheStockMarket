@@ -36,15 +36,15 @@ describe("reduxActions", function () {
 
     it("should create an action to reorder a stock", function () {
         //    given
-        const underlyingId = "GGGG.OQ", newPosition = 3;
+        const oldIndex = 0, newIndex = 3;
         const expectedAction = {
             type: types.REORDER_STOCK,
-            underlyingId,
-            newPosition,
+            oldIndex,
+            newIndex,
         };
 
         //    when
-        let reorderStockAction = actions.reorderStock(underlyingId, newPosition);
+        let reorderStockAction = actions.reorderStock(oldIndex, newIndex);
 
         //    then
         chai.expect(reorderStockAction).to.deep.equal(expectedAction);
