@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {Map} from 'immutable';
+import {List, Map} from 'immutable';
 import configureStore from 'redux-mock-store';
 import chai from '../test-util/chaiWithEnzyme';
 import {matchAction} from '../test-util/matchingHelper';
@@ -30,7 +30,7 @@ describe("StockListContainer", function () {
     describe("props", function () {
         it("should contain the 'stocks' props from initial state", function () {
             //    given
-            const stocks = "someStock";
+            const stocks = List(["someStock"]);
             let initialState = Map({stocks});
             let store = configureStore()(initialState);
 
