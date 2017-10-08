@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
-import {SortableContainer} from 'react-sortable-hoc';
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
 export class SortableList extends Component {
     render() {
@@ -9,5 +9,15 @@ export class SortableList extends Component {
 }
 
 SortableList.propTypes = {
+    children: propTypes.element.isRequired
+};
+
+export class SortableItem extends Component {
+    render() {
+        return React.createElement(SortableElement(() => this.props.children), this.props);
+    }
+}
+
+SortableItem.propTypes = {
     children: propTypes.element.isRequired
 };
