@@ -52,6 +52,19 @@ describe("SortableComponents", function () {
             assertIsSortableItem(wrapper);
         });
 
+        it('should render <SortableItem><div/></SortableItem> with props being passed down correctly', () => {
+            // given
+            let children = <span/>, value="someValue";
+
+            // when
+            let wrapper = shallow(<SortableItem key="item-0" index={0} value={value}>{children}</SortableItem>);
+
+            // then
+            chai.expect(wrapper).to.contain(children);
+            chai.expect(wrapper).to.have.prop('value').that.equal(value);
+            assertIsSortableItem(wrapper);
+        });
+
         function assertIsSortableItem(wrapper) {
             // TODO: to improve
             const SORTABLE_ITEM_ATTRIBUTES = ["collection"];
