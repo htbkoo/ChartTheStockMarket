@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+import * as reactSortableHoc from 'react-sortable-hoc';
+
+const SORTABLE_COMPONENT_FACTORY = {
+    "create": [
+        "SortableContainer",
+        "SortableElement"
+    ].reduce((prev, curr) => {
+        prev[curr] = (props) => React.createElement(reactSortableHoc[curr](() => props.children), props);
+        return prev;
+    }, {})
+};
 
 export class SortableList extends Component {
     render() {
-        return React.createElement(SortableContainer(() => this.props.children), this.props);
+        return SORTABLE_COMPONENT_FACTORY.create.SortableContainer(this.props);
     }
 }
 
@@ -14,7 +24,7 @@ SortableList.propTypes = {
 
 export class SortableItem extends Component {
     render() {
-        return React.createElement(SortableElement(() => this.props.children), this.props);
+        return SORTABLE_COMPONENT_FACTORY.create.SortableElement(this.props);
     }
 }
 
