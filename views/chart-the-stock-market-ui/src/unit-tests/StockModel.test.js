@@ -30,4 +30,19 @@ describe("StockModel", function () {
         stockModel.setStocks(newStocks);
         chai.expect(stockModel.getStocks()).to.equal(newStocks);
     });
+
+    [
+        1,
+        "1",
+        [1]
+    ].forEach(notAnImmutableList => {
+        it(`should, for ${JSON.stringify(notAnImmutableList)} in stockModel.setStocks(notAnImmutableList), throw TypeError`, function () {
+            //    given
+            //    when
+            let stockModel = new StockModel();
+
+            //    then
+            chai.expect(stockModel.setStocks.bind(stockModel, notAnImmutableList)).to.throw(TypeError);
+        });
+    });
 });

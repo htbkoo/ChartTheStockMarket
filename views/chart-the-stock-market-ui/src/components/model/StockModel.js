@@ -7,8 +7,12 @@ export default class StockModel {
             return _stocks;
         };
 
-        this.setStocks = (stocks) => {
-            _stocks = stocks;
+        this.setStocks = stocks => {
+            if (List.isList(stocks)) {
+                _stocks = stocks;
+            }else{
+                throw new TypeError("Passed in stocks should be an immutable.List")
+            }
         }
     }
 }
