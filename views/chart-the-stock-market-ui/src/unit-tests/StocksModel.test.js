@@ -29,6 +29,15 @@ describe("StocksModel", function () {
             chai.expect(stocksModel).to.be.an.instanceOf(StocksModel);
             chai.expect(stocksModel.getStocks()).to.equal(stocks);
         });
+
+        it("should throw TypeError when StocksModel(notAnImmutableList)", function () {
+            //    given
+            let notAnImmutableList = [1, 2, 3];
+
+            //    when
+            //    then
+            chai.expect(() => new StocksModel(notAnImmutableList)).to.throw(TypeError);
+        });
     });
 
     describe("Getters and Setters", function () {

@@ -2,7 +2,7 @@ import {List} from 'immutable';
 
 export default class StocksModel {
     constructor(stocks = List()) {
-        let _stocks = stocks;
+        let _stocks;
 
         this.getStocks = () => {
             return _stocks;
@@ -15,5 +15,7 @@ export default class StocksModel {
                 throw new TypeError("Passed in stocks should be an immutable.List")
             }
         };
+
+        this.setStocks(stocks);
     }
 }
