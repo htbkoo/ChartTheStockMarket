@@ -1,4 +1,8 @@
+import React, {Component} from 'react';
 import {List} from 'immutable';
+import {SortableItem, SortableList} from '../SortableComponents';
+import DisplayFrame from '../DisplayFrame';
+import Stock from '../Stock';
 
 export default class StocksModel {
     constructor(stocks = List()) {
@@ -18,5 +22,23 @@ export default class StocksModel {
                 throw new TypeError("Passed in stocks should be an immutable.List")
             }
         }
+    }
+
+    asSortableComponents(props) {
+        let stocks = this.getStocks();
+
+        return (
+            <SortableList axis="x" onSortEnd={props.onSortEnd}>
+                <div className="StockListContainer">
+                    {stocks.map((stock, index) => (
+                        <SortableItem key={`item-${index}`} index={index}>
+                            <DisplayFrame className="StockDisplayFrame" key={index}>
+                                <Stock stock={stock} onRemoveStock={props.onRemoveStock}/>
+                            </DisplayFrame>
+                        </SortableItem>
+                    ))}
+                </div>
+            </SortableList>
+        );
     }
 }

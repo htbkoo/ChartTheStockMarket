@@ -1,11 +1,18 @@
 import chai from 'chai';
 import chaiImmutable from "chai-immutable";
+import chaiEnzyme from "chai-enzyme";
+import {shallow} from 'enzyme';
+import {List} from 'immutable';
+import React, {Component} from 'react';
 
 import StocksModel from '../components/model/StocksModel';
 
-import {List} from 'immutable';
+import {SortableItem, SortableList} from '../components/SortableComponents';
+import DisplayFrame from '../components/DisplayFrame';
+import Stock from '../components/Stock';
 
 chai.use(chaiImmutable);
+chai.use(chaiEnzyme());
 
 describe("StocksModel", function () {
     describe("Constructor", function () {
@@ -68,6 +75,46 @@ describe("StocksModel", function () {
                 //    then
                 chai.expect(stocksModel.setStocks.bind(stocksModel, notAnImmutableList)).to.throw(TypeError);
             });
+        });
+    });
+
+    describe("asSortableComponents", function () {
+        it("should return SortableList of SortableItem when stocksModel.asSortableComponents()", function () {
+            //    given
+            let stocks = List.of("a", "b"), onSortEnd = "onSortEnd", onRemoveStock = "onRemoveStock";
+            let stocksModel = new StocksModel(stocks);
+
+            let expectedGeneratedComponents = (
+                <SortableList axis="x" onSortEnd={onSortEnd}>
+                    <div className="StockListContainer">
+                        <SortableItem key="item-0" index={0}>
+                            <DisplayFrame className="StockDisplayFrame" key={0}>
+                                <Stock stock="a" onRemoveStock={onRemoveStock}/>
+                            </DisplayFrame>
+                        </SortableItem>
+                        <SortableItem key="item-1" index={1}>
+                            <DisplayFrame className="StockDisplayFrame" key={1}>
+                                <Stock stock="b" onRemoveStock={onRemoveStock}/>
+                            </DisplayFrame>
+                        </SortableItem>
+                    </div>
+                </SortableList>
+            );
+
+            //    when
+            let sortableComponents = stocksModel.asSortableComponents({
+                onSortEnd,
+                onRemoveStock
+            });
+
+            let wrapper = shallow(
+                <div>
+                    {sortableComponents}
+                </div>
+            );
+
+            //    then
+            chai.expect(wrapper).to.containMatchingElement(expectedGeneratedComponents);
         });
     });
 });
