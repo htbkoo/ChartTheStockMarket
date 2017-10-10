@@ -17,6 +17,18 @@ describe("StocksModel", function () {
             //    then
             chai.expect(stocksModel).to.be.an.instanceOf(StocksModel);
         });
+
+        it("should be able to create StocksModel(list)", function () {
+            //    given
+            let stocks = List.of(1, 2, 3);
+
+            //    when
+            let stocksModel = new StocksModel(stocks);
+
+            //    then
+            chai.expect(stocksModel).to.be.an.instanceOf(StocksModel);
+            chai.expect(stocksModel.getStocks()).to.equal(stocks);
+        });
     });
 
     describe("Getters and Setters", function () {
