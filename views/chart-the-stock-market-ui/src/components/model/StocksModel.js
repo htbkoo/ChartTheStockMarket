@@ -1,6 +1,6 @@
 import {List} from 'immutable';
 
-export default class StockModel {
+export default class StocksModel {
     constructor() {
         let _stocks = List();
         this.getStocks = () => {
@@ -10,7 +10,7 @@ export default class StockModel {
         this.setStocks = stocks => {
             if (List.isList(stocks)) {
                 _stocks = stocks;
-            }else{
+            } else {
                 throw new TypeError("Passed in stocks should be an immutable.List")
             }
         }
