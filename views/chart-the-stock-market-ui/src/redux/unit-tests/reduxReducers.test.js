@@ -13,13 +13,11 @@ describe("reduxReducers", function () {
 
     describe("no action", function () {
         it("should return the initial state", testReducer({
-            params:
-                {
-                    state: undefined,
-                    action:
-                        {}
-                }
-            ,
+            params: {
+                state: undefined,
+                action:
+                    {}
+            },
             expectedState: initialState
         }));
     });
