@@ -79,42 +79,49 @@ describe("StocksModel", function () {
     });
 
     describe("asSortableComponents", function () {
-        it("should return SortableList of SortableItem when stocksModel.asSortableComponents()", function () {
-            //    given
-            let stocks = List.of("a", "b"), onSortEnd = "onSortEnd", onRemoveStock = "onRemoveStock";
-            let stocksModel = new StocksModel(stocks);
+        [
+            {
+                stocks: List.of("a", "b"),
+                onSortEnd: "onSortEnd",
+                onRemoveStock: "onRemoveStock",
+                expectedGeneratedComponents: (
+                    <SortableList axis="x" onSortEnd={"onSortEnd"}>
+                        <div className="StockListContainer">
+                            <SortableItem key="item-0" index={0}>
+                                <DisplayFrame className="StockDisplayFrame" key={0}>
+                                    <Stock stock="a" onRemoveStock={"onRemoveStock"}/>
+                                </DisplayFrame>
+                            </SortableItem>
+                            <SortableItem key="item-1" index={1}>
+                                <DisplayFrame className="StockDisplayFrame" key={1}>
+                                    <Stock stock="b" onRemoveStock={"onRemoveStock"}/>
+                                </DisplayFrame>
+                            </SortableItem>
+                        </div>
+                    </SortableList>
+                )
+            }
+        ].forEach(testCase =>
+            it(`should return SortableList of SortableItem when StocksModel(List(${JSON.stringify(testCase.stocks.toArray())})).asSortableComponents()`, function () {
+                //    given
+                let {stocks, onSortEnd, onRemoveStock, expectedGeneratedComponents} = testCase;
+                let stocksModel = new StocksModel(stocks);
 
-            let expectedGeneratedComponents = (
-                <SortableList axis="x" onSortEnd={onSortEnd}>
-                    <div className="StockListContainer">
-                        <SortableItem key="item-0" index={0}>
-                            <DisplayFrame className="StockDisplayFrame" key={0}>
-                                <Stock stock="a" onRemoveStock={onRemoveStock}/>
-                            </DisplayFrame>
-                        </SortableItem>
-                        <SortableItem key="item-1" index={1}>
-                            <DisplayFrame className="StockDisplayFrame" key={1}>
-                                <Stock stock="b" onRemoveStock={onRemoveStock}/>
-                            </DisplayFrame>
-                        </SortableItem>
+                //    when
+                let sortableComponents = stocksModel.asSortableComponents({
+                    onSortEnd,
+                    onRemoveStock
+                });
+
+                let wrapper = shallow(
+                    <div>
+                        {sortableComponents}
                     </div>
-                </SortableList>
-            );
+                );
 
-            //    when
-            let sortableComponents = stocksModel.asSortableComponents({
-                onSortEnd,
-                onRemoveStock
-            });
-
-            let wrapper = shallow(
-                <div>
-                    {sortableComponents}
-                </div>
-            );
-
-            //    then
-            chai.expect(wrapper).to.containMatchingElement(expectedGeneratedComponents);
-        });
+                //    then
+                chai.expect(wrapper).to.containMatchingElement(expectedGeneratedComponents);
+            })
+        )
     });
 });
