@@ -81,7 +81,18 @@ describe("StocksModel", function () {
     describe("asSortableComponents", function () {
         [
             {
-                stocks: List.of("a", "b"),
+                stocks: List.of(),
+                onSortEnd: "onSortEnd",
+                onRemoveStock: "onRemoveStock",
+                expectedGeneratedComponents: (
+                    <SortableList axis="x" onSortEnd={"onSortEnd"}>
+                        <div className="StockListContainer">
+                        </div>
+                    </SortableList>
+                )
+            },
+            {
+                stocks: List.of("AAAA.AA"),
                 onSortEnd: "onSortEnd",
                 onRemoveStock: "onRemoveStock",
                 expectedGeneratedComponents: (
@@ -89,12 +100,27 @@ describe("StocksModel", function () {
                         <div className="StockListContainer">
                             <SortableItem key="item-0" index={0}>
                                 <DisplayFrame className="StockDisplayFrame" key={0}>
-                                    <Stock stock="a" onRemoveStock={"onRemoveStock"}/>
+                                    <Stock stock="AAAA.AA" onRemoveStock={"onRemoveStock"}/>
+                                </DisplayFrame>
+                            </SortableItem>
+                        </div>
+                    </SortableList>
+                )
+            },{
+                stocks: List.of("a", "b"),
+                onSortEnd: "onSortEnd2",
+                onRemoveStock: "onRemoveStock2",
+                expectedGeneratedComponents: (
+                    <SortableList axis="x" onSortEnd={"onSortEnd2"}>
+                        <div className="StockListContainer">
+                            <SortableItem key="item-0" index={0}>
+                                <DisplayFrame className="StockDisplayFrame" key={0}>
+                                    <Stock stock="a" onRemoveStock={"onRemoveStock2"}/>
                                 </DisplayFrame>
                             </SortableItem>
                             <SortableItem key="item-1" index={1}>
                                 <DisplayFrame className="StockDisplayFrame" key={1}>
-                                    <Stock stock="b" onRemoveStock={"onRemoveStock"}/>
+                                    <Stock stock="b" onRemoveStock={"onRemoveStock2"}/>
                                 </DisplayFrame>
                             </SortableItem>
                         </div>
@@ -120,7 +146,7 @@ describe("StocksModel", function () {
                 );
 
                 //    then
-                chai.expect(wrapper).to.containMatchingElement(expectedGeneratedComponents);
+                chai.expect(wrapper).to.contain(expectedGeneratedComponents);
             })
         )
     });
