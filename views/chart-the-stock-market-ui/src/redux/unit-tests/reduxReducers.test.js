@@ -9,7 +9,7 @@ import StocksModel from "../../components/model/StocksModel";
 chai.use(chaiImmutable);
 
 describe("reduxReducers", function () {
-    const initialState = createImmutableState().withStocksModel([]);
+    const initialState = createImmutableState().withStocksModelFromStocks([]);
 
     describe("no action", function () {
         it("should return the initial state", testReducer({
@@ -33,7 +33,7 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel(["someId"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["someId"])
             },
             {
                 name: "should handle ADD_STOCK for empty stocks case",
@@ -44,29 +44,29 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel(["someId"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["someId"])
             },
             {
                 name: "should handle ADD_STOCK for non-empty stocks case",
                 params: {
-                    state: createImmutableState().withStocksModel(["existing"]),
+                    state: createImmutableState().withStocksModelFromStocks(["existing"]),
                     action: {
                         type: types.ADD_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel(["existing", "someId"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["existing", "someId"])
             },
             {
                 name: "should handle ADD_STOCK for same underlyingId case",
                 params: {
-                    state: createImmutableState().withStocksModel(["duplicate"]),
+                    state: createImmutableState().withStocksModelFromStocks(["duplicate"]),
                     action: {
                         type: types.ADD_STOCK,
                         underlyingId: "duplicate"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel(["duplicate"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["duplicate"])
             },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
@@ -84,29 +84,29 @@ describe("reduxReducers", function () {
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel([])
+                expectedState: createImmutableState().withStocksModelFromStocks([])
             },
             {
                 name: "should handle REMOVE_STOCK for unmatched case",
                 params: {
-                    state: createImmutableState().withStocksModel(["anotherId"]),
+                    state: createImmutableState().withStocksModelFromStocks(["anotherId"]),
                     action: {
                         type: types.REMOVE_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel(["anotherId"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["anotherId"])
             },
             {
                 name: "should handle REMOVE_STOCK for matched case",
                 params: {
-                    state: createImmutableState().withStocksModel(["someId"]),
+                    state: createImmutableState().withStocksModelFromStocks(["someId"]),
                     action: {
                         type: types.REMOVE_STOCK,
                         underlyingId: "someId"
                     }
                 },
-                expectedState: createImmutableState().withStocksModel([])
+                expectedState: createImmutableState().withStocksModelFromStocks([])
             },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
@@ -121,31 +121,31 @@ describe("reduxReducers", function () {
                     state: undefined,
                     action: createReorderAction().from(0).to(0)
                 },
-                expectedState: createImmutableState().withStocksModel([])
+                expectedState: createImmutableState().withStocksModelFromStocks([])
             },
             {
                 name: "should handle REORDER_STOCK for unmatched case",
                 params: {
-                    state: createImmutableState().withStocksModel(["anotherId"]),
+                    state: createImmutableState().withStocksModelFromStocks(["anotherId"]),
                     action: createReorderAction().from(0).to(1)
                 },
-                expectedState: createImmutableState().withStocksModel(["anotherId"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["anotherId"])
             },
             {
                 name: "should handle REORDER_STOCK for moving from 0 to 1",
                 params: {
-                    state: createImmutableState().withStocksModel(["someId0", "someId1"]),
+                    state: createImmutableState().withStocksModelFromStocks(["someId0", "someId1"]),
                     action: createReorderAction().from(0).to(1)
                 },
-                expectedState: createImmutableState().withStocksModel(["someId1", "someId0"])
+                expectedState: createImmutableState().withStocksModelFromStocks(["someId1", "someId0"])
             },
             {
                 name: "should handle REORDER_STOCK for moving from 4 to 2",
                 params: {
-                    state: createImmutableState().withStocksModel(["i0", "i1", "i2", "i3", "i4", "i5",]),
+                    state: createImmutableState().withStocksModelFromStocks(["i0", "i1", "i2", "i3", "i4", "i5",]),
                     action: createReorderAction().from(4).to(2)
                 },
-                expectedState: createImmutableState().withStocksModel(["i0", "i1", "i4", "i2", "i3", "i5",])
+                expectedState: createImmutableState().withStocksModelFromStocks(["i0", "i1", "i4", "i2", "i3", "i5",])
             },
         ].forEach(testCase =>
             it(testCase.name, testReducer(testCase))
@@ -193,7 +193,7 @@ describe("reduxReducers", function () {
 
     function createImmutableState() {
         return {
-            withStocksModel(stocks) {
+            withStocksModelFromStocks(stocks) {
                 return Map({
                     stocksModel: new StocksModel(List(stocks))
                 });
