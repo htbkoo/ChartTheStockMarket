@@ -81,6 +81,7 @@ describe("StocksModel", function () {
     describe("asSortableComponents", function () {
         [
             {
+                testName: "Empty stocks",
                 stocks: List.of(),
                 onSortEnd: "onSortEnd",
                 onRemoveStock: "onRemoveStock",
@@ -92,6 +93,7 @@ describe("StocksModel", function () {
                 )
             },
             {
+                testName: "One stock",
                 stocks: List.of("AAAA.AA"),
                 onSortEnd: "onSortEnd",
                 onRemoveStock: "onRemoveStock",
@@ -106,7 +108,9 @@ describe("StocksModel", function () {
                         </div>
                     </SortableList>
                 )
-            },{
+            },
+            {
+                testName: "Multiple stocks",
                 stocks: List.of("a", "b"),
                 onSortEnd: "onSortEnd2",
                 onRemoveStock: "onRemoveStock2",
@@ -128,7 +132,7 @@ describe("StocksModel", function () {
                 )
             }
         ].forEach(testCase =>
-            it(`should return SortableList of SortableItem when StocksModel(List(${JSON.stringify(testCase.stocks.toArray())})).asSortableComponents()`, function () {
+            it(`should, for ${testCase.testName} , return SortableList of SortableItem when stocksModel.asSortableComponents()`, function () {
                 //    given
                 let {stocks, onSortEnd, onRemoveStock, expectedGeneratedComponents} = testCase;
                 let stocksModel = new StocksModel(stocks);
