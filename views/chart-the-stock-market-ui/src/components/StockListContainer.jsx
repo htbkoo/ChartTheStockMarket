@@ -4,7 +4,7 @@ import stringHelper from '../utils/stringHelper';
 import StockList from './StockList';
 
 const mapStateToProps = state => ({
-    "stocks": state.get("stocks")
+    "stocksModel": state.get("stocksModel")
 });
 
 export const mapDispatchToProps = dispatch => [

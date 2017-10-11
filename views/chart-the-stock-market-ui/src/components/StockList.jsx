@@ -6,10 +6,11 @@ import {List} from 'immutable';
 
 import Stock from './Stock';
 import DisplayFrame from './DisplayFrame';
+import StocksModel from "./model/StocksModel";
 
 export default class StockList extends Component {
     render() {
-        let stockComponents = this.props.stocks.map((stock, key) => (
+        let stockComponents = this.props.stocksModel.getStocks().map((stock, key) => (
             <DisplayFrame className="StockDisplayFrame" key={key}>
                 <Stock stock={stock} onRemoveStock={this.props.onRemoveStock}/>
             </DisplayFrame>
@@ -24,9 +25,9 @@ export default class StockList extends Component {
 }
 
 StockList.propTypes = {
-    stocks: propTypes.instanceOf(List).isRequired
+    stocksModel: propTypes.instanceOf(List).isRequired
 };
 
 StockList.defaultProps = {
-    stocks: List()
+    stocksModel: new StocksModel(List())
 };

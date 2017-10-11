@@ -5,12 +5,13 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import App from '../App.jsx';
+import StocksModel from "../components/model/StocksModel";
 
 describe("mount test - App", function () {
     beforeEach(() => require('./setup.jsx'));
 
     it('renders with a mock store without crashing', () => {
-        let initialState = Map({stocks: List()});
+        let initialState = Map({stocksModel: new StocksModel(List())});
         mount(
             <Provider store={configureStore()(initialState)}>
                 <App/>

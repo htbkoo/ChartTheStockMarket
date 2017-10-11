@@ -7,14 +7,16 @@ import StockList from '../components/StockList.jsx';
 
 import Stock from '../components/Stock.jsx';
 import DisplayFrame from '../components/DisplayFrame.jsx';
+import StocksModel from "../components/model/StocksModel";
 
 describe("StockList", function () {
-    it('should have a list of <DisplayFrame/> with onRemoveStock, child=stock and className=StockDisplayFrame in <StockList stocks/>', () => {
+    it('should have a list of <DisplayFrame/> with onRemoveStock, child=stock and className=StockDisplayFrame in <StockList stocksModel/>', () => {
         // given
         let stocks = List([Map({"name": "A"}), Map({"name": "B"})]), mockOnRemoveStock = "mockFunction";
+        let stocksModel = new StocksModel(stocks);
 
         // when
-        let wrapper = shallow(<StockList stocks={stocks} onRemoveStock={mockOnRemoveStock}/>);
+        let wrapper = shallow(<StockList stocksModel={stocksModel} onRemoveStock={mockOnRemoveStock}/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(stocks.size);
@@ -28,9 +30,10 @@ describe("StockList", function () {
 
     it('should be able to render <StockList/> if stocks props is an empty list', () => {
         // given
+        let stocksModel = new StocksModel(List());
 
         // when
-        let wrapper = shallow(<StockList stocks={List()}/>);
+        let wrapper = shallow(<StockList stocksModel={stocksModel}/>);
 
         // then
         assertNumberOfStockIn(wrapper).to.be(0);

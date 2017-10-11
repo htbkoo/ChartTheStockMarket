@@ -3,12 +3,12 @@ import {Map, List} from 'immutable';
 import StocksModel from "../components/model/StocksModel";
 
 const initialState = Map({
-    stocks: newStocksModel(List())
+    stocksModel: newStocksModel(List())
 });
 
 export default function stocks(state = initialState, action) {
     let targetUnderlyingId = action.underlyingId;
-    let stocksModel = state.get('stocks');
+    let stocksModel = state.get('stocksModel');
     let stateStocks = stocksModel.getStocks();
     let index = stateStocks.indexOf(targetUnderlyingId);
     switch (action.type) {
@@ -48,7 +48,7 @@ function newStocksModel(stocksList) {
 function setState(state) {
     return {
         withStocks(stocks) {
-            return state.set('stocks', newStocksModel(stocks));
+            return state.set('stocksModel', newStocksModel(stocks));
         }
     }
 }

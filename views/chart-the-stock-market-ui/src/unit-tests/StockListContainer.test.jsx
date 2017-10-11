@@ -10,6 +10,7 @@ import StockListContainer, {mapDispatchToProps} from '../components/StockListCon
 
 import StockList from '../components/StockList.jsx';
 import * as reduxActions from '../redux/reduxActions';
+import StocksModel from "../components/model/StocksModel";
 
 describe("StockListContainer", function () {
     describe("rendering", function () {
@@ -31,14 +32,16 @@ describe("StockListContainer", function () {
         it("should contain the 'stocks' props from initial state", function () {
             //    given
             const stocks = List(["someStock"]);
-            let initialState = Map({stocks});
+            const stocksModel = new StocksModel(stocks);
+            let initialState = Map({stocksModel});
             let store = configureStore()(initialState);
 
             //    when
             let container = shallow(<StockListContainer store={store}/>);
 
             //    then
-            chai.expect(container).to.have.prop('stocks').that.equal(stocks);
+            chai.expect(container).to.have.prop('stocksModel').that.is.an.instanceof(StocksModel);
+            chai.expect(container.prop('stocksModel').getStocks()).to.equal(stocks);
         });
     });
 
