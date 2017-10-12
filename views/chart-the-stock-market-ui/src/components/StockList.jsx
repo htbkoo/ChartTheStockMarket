@@ -25,7 +25,7 @@ export default class StockList extends Component {
 }
 
 StockList.propTypes = {
-    stocksModel: propTypes.instanceOf(List).isRequired
+    stocksModel: propTypes.instanceOf(StocksModel).isRequired
 };
 
 StockList.defaultProps = {
