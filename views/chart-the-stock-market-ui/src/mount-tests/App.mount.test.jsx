@@ -10,8 +10,17 @@ import StocksModel from "../components/model/StocksModel";
 describe("mount test - App", function () {
     beforeEach(() => require('./setup.jsx'));
 
-    it('renders with a mock store without crashing', () => {
+    it('renders with an empty mock store without crashing', () => {
         let initialState = Map({stocksModel: new StocksModel(List())});
+        mount(
+            <Provider store={configureStore()(initialState)}>
+                <App/>
+            </Provider>
+        );
+    });
+
+    it('renders with multiple stocks mock store of without crashing', () => {
+        let initialState = Map({stocksModel: new StocksModel(List.of("VMW.N", "GOOG.OQ"))});
         mount(
             <Provider store={configureStore()(initialState)}>
                 <App/>
