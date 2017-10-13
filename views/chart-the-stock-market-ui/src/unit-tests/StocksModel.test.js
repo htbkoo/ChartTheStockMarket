@@ -132,7 +132,7 @@ describe("StocksModel", function () {
                 )
             }
         ].forEach(testCase =>
-            it(`should, for ${testCase.testName} , return SortableList of SortableItem when stocksModel.asSortableComponents()`, function () {
+            it(`should, for ${testCase.testName}, return SortableList of SortableItem when stocksModel.asSortableComponents()`, function () {
                 //    given
                 let {stocks, onSortEnd, onRemoveStock, expectedGeneratedComponents} = testCase;
                 let stocksModel = new StocksModel(stocks);
@@ -152,6 +152,40 @@ describe("StocksModel", function () {
                 //    then
                 chai.expect(wrapper).to.contain(expectedGeneratedComponents);
             })
-        )
+        );
+
+        it(`should, given props param is omitted, still be able to return SortableList of SortableItem when stocksModel.asSortableComponents()`, function () {
+            //    given
+            let expectedGeneratedComponents = (
+                <SortableList axis="x">
+                    <div className="StockListContainer">
+                        <SortableItem key="item-0" index={0}>
+                            <DisplayFrame className="StockDisplayFrame" key={0}>
+                                <Stock stock="a"/>
+                            </DisplayFrame>
+                        </SortableItem>
+                        <SortableItem key="item-1" index={1}>
+                            <DisplayFrame className="StockDisplayFrame" key={1}>
+                                <Stock stock="b"/>
+                            </DisplayFrame>
+                        </SortableItem>
+                    </div>
+                </SortableList>
+            );
+            let stocks = List.of("a", "b");
+            let stocksModel = new StocksModel(stocks);
+
+            //    when
+            let sortableComponents = stocksModel.asSortableComponents();
+
+            let wrapper = shallow(
+                <div>
+                    {sortableComponents}
+                </div>
+            );
+
+            //    then
+            chai.expect(wrapper).to.containMatchingElement(expectedGeneratedComponents);
+        })
     });
 });

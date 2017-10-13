@@ -24,7 +24,7 @@ export default class StocksModel {
         }
     }
 
-    asSortableComponents(props) {
+    asSortableComponents(props = {}) {
         let stocks = this.getStocks();
 
         return (
