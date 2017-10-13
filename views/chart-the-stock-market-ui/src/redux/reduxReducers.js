@@ -6,7 +6,7 @@ const initialState = Map({
     stocksModel: newStocksModel(List())
 });
 
-export default function stocks(state = initialState, action) {
+export default function reducers(state = initialState, action) {
     let targetUnderlyingId = action.underlyingId;
     let stocksModel = state.get('stocksModel');
     let stateStocks = stocksModel.getStocks();
