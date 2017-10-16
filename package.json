@@ -6,18 +6,28 @@
   "author": "htbkoo",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "run": "node ./bin/www",
+    "debug": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./bin/www",
     "clean": "rimraf ./build/ && mkdir build",
     "build-ui": "cd ./views/chart-the-stock-market-ui && npm run build",
     "copy-ui": "cpx ./views/chart-the-stock-market-ui/build/**/* ./build/public",
     "pack-ui": "npm run build-ui && npm run copy-ui",
     "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,chart-the-stock-market-ui,build,__mocks__ --copy-files",
     "build-all": "npm run clean && npm run build-server && npm run pack-ui",
-    "run": "babel-node ./build/bin/www",
+    "startBuild": "babel-node ./build/bin/www",
     "rebuild-run": "npm run build-all && npm run run",
-    "debug": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
-    "rebuild-debug": "npm run build-all && npm run debug"
+    "debugBuild": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
+    "rebuild-debug": "npm run build-all && npm run debug",
+    "test": "swagger project test"
   },
+  "description": "Chart the Stock Market, FreeCodeCamp - Dynamic Web Application Projects",
+  "keywords": [
+    "Chart the Stock Market",
+    "Stock",
+    "FreeCodeCamp",
+    "Swagger",
+    "React"
+  ],
   "dependencies": {
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
@@ -25,7 +35,8 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -41,7 +52,9 @@
     "istanbul": "^0.4.5",
     "jest": "^20.0.4",
     "mocha": "^3.5.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
   },
   "jest": {
     "moduleNameMapper": {
