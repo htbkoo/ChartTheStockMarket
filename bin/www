@@ -31,9 +31,7 @@ server.on('listening', onListening);
 // server.on('listening', onListening.bind(this, server));
 
 // Swagger
-if (app.isSwaggerHello){
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
-}
+console.log(`try viewing this in browser:\nhttp://127.0.0.1:${port}/docs`);
 
 /**
  * Normalize a port into a number, string, or false.

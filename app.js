@@ -34,10 +34,6 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
         throw err;
     }
 
-    if (swaggerExpress.runner.swagger.paths['/hello']) {
-        app.isSwaggerHello = true;
-    }
-
     // Serve the Swagger documents and Swagger UI
     app.use(swaggerExpress.runner.swaggerTools.swaggerUi());
 
@@ -47,14 +43,14 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // app.use('/', index);
     app.use('/users', users);
 
-// catch 404 and forward to error handler
+    // catch 404 and forward to error handler
     app.use(function (req, res, next) {
         let err = new Error('Not Found');
         err.status = 404;
         next(err);
     });
 
-// error handler
+    // error handler
     app.use(function (err, req, res, next) {
         // set locals, only providing error in development
         res.locals.message = err.message;
