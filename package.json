@@ -54,7 +54,7 @@
     "mocha": "^3.5.0",
     "rimraf": "^2.6.1",
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^3.0.0"
   },
   "jest": {
     "moduleNameMapper": {
