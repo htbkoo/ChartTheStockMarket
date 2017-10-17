@@ -6,7 +6,6 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let index = require('./routes/index');
-let users = require('./routes/users');
 
 let app = express();
 
@@ -40,8 +39,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // install middleware
     swaggerExpress.register(app);
 
-    // app.use('/', index);
-    app.use('/users', users);
+    app.use('/', index);
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {
