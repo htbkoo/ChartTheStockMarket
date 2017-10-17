@@ -15,6 +15,7 @@ describe('routes', function () {
                     .expect(302)
                     .expect('Location', /index.html/)
                     .then(res => {
+                        // Reference: https://stackoverflow.com/a/12291849
                         chai.expect(res.header['location']).to.have.string("index.html");
                     });
             });
