@@ -14,11 +14,13 @@
     "pack-ui": "npm run build-ui && npm run copy-ui",
     "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,chart-the-stock-market-ui,build,__mocks__ --copy-files",
     "build-all": "npm run clean && npm run build-server && npm run pack-ui",
-    "startBuilt": "babel-node ./build/bin/www",
+    "start-built": "babel-node ./build/bin/www",
     "rebuild-run": "npm run build-all && npm run run",
-    "debugBuilt": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
+    "debug-built": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
     "rebuild-debug": "npm run build-all && npm run debug",
-    "test": "swagger project test"
+    "swagger-edit": "swagger project edit",
+    "swagger-test": "swagger project test",
+    "swagger-start": "swagger project start"
   },
   "description": "Chart the Stock Market, FreeCodeCamp - Dynamic Web Application Projects",
   "keywords": [
