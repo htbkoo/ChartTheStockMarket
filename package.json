@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "heroku-prebuild": "npm run build-ui",
+    "heroku-postbuild": "npm run build-ui",
     "debug": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./bin/www",
     "clean": "rimraf ./build/ && mkdir build",
     "build-ui": "cd ./views/chart-the-stock-market-ui && npm install --only=dev && npm install && npm run build",
