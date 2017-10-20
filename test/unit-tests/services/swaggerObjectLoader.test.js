@@ -23,6 +23,18 @@ describe('services', function () {
                 // then
                 chai.expect(swaggerObject).to.deep.equal(expectedObject);
             });
+
+            it('should return the defaultValue when safeLoad non-existent file', function () {
+                // given
+                let defaultValue = {"key": "value"};
+                let path = "someNonExistentFile.abc";
+
+                // when
+                let swaggerObject = swaggerObjectLoader.safeLoadOrElse({path}, defaultValue);
+
+                // then
+                chai.expect(swaggerObject).to.deep.equal(defaultValue);
+            });
         });
     });
 

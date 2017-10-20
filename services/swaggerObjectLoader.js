@@ -2,8 +2,8 @@ import fs from "fs";
 import yaml from "js-yaml";
 
 export default {
-    safeLoadOrElse(params) {
-        let swaggerObject = {};
+    safeLoadOrElse(params, defaultValue = {}) {
+        let swaggerObject = defaultValue;
         try {
             swaggerObject = yaml.safeLoad(fs.readFileSync(params.path, params.options));
         } catch (err) {
