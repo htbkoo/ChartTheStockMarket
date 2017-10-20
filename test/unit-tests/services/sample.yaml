@@ -1,0 +1,5 @@
+key:
+  subKey1: "someValue"
+  subKey2: some other Value
+# during dev, should point to your local machine
+anotherKey: 3000
