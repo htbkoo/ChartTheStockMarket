@@ -1,7 +1,7 @@
-import fs from "fs";
-import yaml from "js-yaml";
+let fs = require("fs");
+let yaml = require("js-yaml");
 
-export default {
+module.exports = {
     safeLoadOrElse(params, defaultValue = {}) {
         let swaggerObject = defaultValue;
         try {
@@ -11,4 +11,4 @@ export default {
         }
         return swaggerObject;
     }
-}
+};
