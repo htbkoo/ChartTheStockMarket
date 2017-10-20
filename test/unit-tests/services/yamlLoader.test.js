@@ -1,10 +1,10 @@
 import chai from "chai";
 import path from "path";
 
-import swaggerObjectLoader from "../../../services/swaggerObjectLoader";
+import yamlLoader from "../../../services/yamlLoader";
 
 describe('services', function () {
-    describe("swaggerObjectLoader", function () {
+    describe("yamlLoader", function () {
         describe('safeLoadOrElse', function () {
             it('should safeLoad sample.yaml and create the yaml object successfully', function () {
                 // given
@@ -18,7 +18,7 @@ describe('services', function () {
                 let path = getRelativePath("sample.yaml"), options = "utf-8";
 
                 // when
-                let swaggerObject = swaggerObjectLoader.safeLoadOrElse({path, options});
+                let swaggerObject = yamlLoader.safeLoadOrElse({path, options});
 
                 // then
                 chai.expect(swaggerObject).to.deep.equal(expectedObject);
@@ -30,7 +30,7 @@ describe('services', function () {
                 let path = "someNonExistentFile.abc";
 
                 // when
-                let swaggerObject = swaggerObjectLoader.safeLoadOrElse({path}, defaultValue);
+                let swaggerObject = yamlLoader.safeLoadOrElse({path}, defaultValue);
 
                 // then
                 chai.expect(swaggerObject).to.deep.equal(defaultValue);
