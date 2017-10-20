@@ -21,11 +21,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views', 'chart-the-stock-market-ui', 'build')));
 
+/**
+ * Get port from environment and store in Express.
+ */
+
+let port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
 // Swagger - start
 let SwaggerExpress = require('swagger-express-mw');
-// let appRoot = path.normalize(`${__dirname}/..`);
+let yamlLoader = require('./services/yamlLoader');
+
+let swaggerObject = yamlLoader.safeLoadOrElse({path: './api/swagger/swagger.yaml', options:'utf8'}, {});
+swaggerObject.host = 'localhost:' + port;
+
 let config = {
-    appRoot: __dirname // required config
+    appRoot: __dirname, // required config
+    swagger: swaggerObject
 };
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
@@ -62,3 +74,23 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 // Swagger - end
 
 module.exports = app;
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+    let port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
