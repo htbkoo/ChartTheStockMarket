@@ -5,8 +5,6 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
-let index = require('./routes/index');
-
 let app = express();
 
 // view engine setup
@@ -19,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Served index.html from ui here for '/'
 app.use(express.static(path.join(__dirname, 'views', 'chart-the-stock-market-ui', 'build')));
 
 /**
@@ -50,8 +49,6 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     // install middleware
     swaggerExpress.register(app);
-
-    app.use('/', index);
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {
