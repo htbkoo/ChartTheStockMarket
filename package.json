@@ -38,6 +38,7 @@
     "express": "~4.15.2",
     "js-yaml": "^3.10.0",
     "morgan": "~1.8.1",
+    "pem-promise": "^1.0.0",
     "serve-favicon": "~2.4.2",
     "swagger-express-mw": "^0.1.0"
   },
