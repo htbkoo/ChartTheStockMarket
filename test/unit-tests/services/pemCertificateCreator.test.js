@@ -19,9 +19,7 @@ describe('services', function () {
                 let promise = pemCertificateCreator.promiseCreate();
 
                 // then
-                return promise.then(response =>
-                    chai.expect(response).to.equal(mockCertificate)
-                );
+                return chai.expect(promise).to.eventually.deep.equal(mockCertificate);
             }));
 
             it('should propogate the error from pem.createCertificate() when promiseCreate()', sinonTest(function () {
