@@ -31,7 +31,9 @@ describe('services', function () {
                 let promise = pemCertificateCreator.promiseCreate();
 
                 // then
-                return chai.expect(promise).to.eventually.be.rejectedWith(expectedError);
+                return chai.expect(promise).to.eventually
+                    .be.rejectedWith(expectedError)
+                    .and.be.an.instanceOf(Error);
             }));
         });
     });
