@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "0.1.0"
+  version: "0.1.1"
   title: FreeCodeCamp - Chart the Stock Market (Hey)
 # during dev, should point to your local machine
 host: localhost:3000
