@@ -13,6 +13,16 @@ require('dotenv').config();
 let app = require('../app');
 let debug = require('debug')('chart-the-stock-market:server');
 let http = require('http');
+let log = require('loglevel');
+
+/**
+ * Setup loglevel.
+ */
+(function setLogLevel(){
+    let propertiesLevel = process.env.LOGLEVEL_LEVEL, defaultLevel = "INFO";
+    let level = propertiesLevel in log.levels?log.levels[propertiesLevel]: defaultLevel;
+    log.setDefaultLevel(level);
+}());
 
 /**
  * Create HTTP server.

@@ -1,6 +1,7 @@
 let express = require('express');
 let path = require('path');
 let favicon = require('serve-favicon');
+let log = require('loglevel');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
@@ -52,7 +53,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // Serve the Swagger documents and Swagger UI
     app.use(swaggerExpress.runner.swaggerTools.swaggerUi());
 
-    console.log(`try viewing this in browser:\nhttps://${swaggerObject.host}/docs`);
+    log.info(`try viewing this in browser:\nhttps://${swaggerObject.host}/docs`);
 
     // install middleware
     swaggerExpress.register(app);
