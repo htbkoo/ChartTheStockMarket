@@ -42,11 +42,6 @@ pemCertificateCreator.promiseCreate({
     server.on('listening', onListening);
 
     /**
-     * Swagger related setups and loggings
-     */
-    console.log(`try viewing this in browser:\nhttps://127.0.0.1:${port}/docs`);
-
-    /**
      * Event listener for HTTP server "error" event.
      */
 

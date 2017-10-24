@@ -30,9 +30,10 @@ app.set('port', port);
 // Swagger - start
 let SwaggerExpress = require('swagger-express-mw');
 let yamlLoader = require('./services/yamlLoader');
+let swaggerHostResolver = require('./services/swaggerHostResolver');
 
 let swaggerObject = yamlLoader.safeLoadOrElse({path: './api/swagger/swagger.yaml', options:'utf8'}, {});
-swaggerObject.host = 'localhost:' + port;
+swaggerObject.host = swaggerHostResolver.resolve();
 
 let config = {
     appRoot: __dirname, // required config
@@ -44,8 +45,14 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
         throw err;
     }
 
+    /**
+     * Swagger related setups and loggings
+     */
+
     // Serve the Swagger documents and Swagger UI
     app.use(swaggerExpress.runner.swaggerTools.swaggerUi());
+
+    console.log(`try viewing this in browser:\nhttps://${swaggerObject.host}/docs`);
 
     // install middleware
     swaggerExpress.register(app);
