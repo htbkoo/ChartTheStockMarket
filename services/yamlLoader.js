@@ -1,5 +1,6 @@
 let fs = require("fs");
 let yaml = require("js-yaml");
+let log = require("loglevel");
 
 module.exports = {
     safeLoadOrElse(params, defaultValue = {}) {
@@ -7,7 +8,7 @@ module.exports = {
         try {
             swaggerObject = yaml.safeLoad(fs.readFileSync(params.path, params.options));
         } catch (err) {
-            console.log(err);
+            log.warn(err);
         }
         return swaggerObject;
     }

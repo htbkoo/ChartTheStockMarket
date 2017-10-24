@@ -1,5 +1,7 @@
 import chai from "chai";
 import path from "path";
+import {sinon, sinonTest} from "../../test-utils/sinonWithSinonTest";
+import loglevel from "loglevel";
 
 import yamlLoader from "../../../services/yamlLoader";
 
@@ -24,17 +26,21 @@ describe('services', function () {
                 chai.expect(swaggerObject).to.deep.equal(expectedObject);
             });
 
-            it('should return the defaultValue when safeLoad non-existent file', function () {
+            it('should return the defaultValue and log with loglevel.warn() when safeLoad non-existent file', sinonTest(function () {
                 // given
                 let defaultValue = {"key": "value"};
                 let path = "someNonExistentFile.abc";
+                let mockLogLevel = this.mock(loglevel);
+                let matchExpectedError = sinon.match.instanceOf(Error).and(sinon.match.has('message', sinon.match(/ENOENT: no such file or directory, open/)));
+                mockLogLevel.expects("warn").withArgs(matchExpectedError).once();
 
                 // when
                 let swaggerObject = yamlLoader.safeLoadOrElse({path}, defaultValue);
 
                 // then
                 chai.expect(swaggerObject).to.deep.equal(defaultValue);
-            });
+                mockLogLevel.verify();
+            }));
         });
     });
 
