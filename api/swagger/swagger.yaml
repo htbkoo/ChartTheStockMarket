@@ -71,21 +71,23 @@ definitions:
       message:
         type: string
   StocksResponse:
-    required:
-      - stocks
-    properties:
-      stocks:
-        type: object
-        properties:
-          underlyingId:
-            type: string
-            description: The ID for the stock instrument.
-          spotPrice:
-            type: number
-            description: The spot price of the stock.
+    type: array
+    items:
+      $ref: "#/definitions/Stocks"
   ErrorResponse:
     required:
       - message
     properties:
       message:
         type: string
+  Stocks:
+    required:
+      - underlyingId
+      - spotPrice
+    properties:
+      underlyingId:
+        type: string
+        description: The ID for the stock instrument.
+      spotPrice:
+        type: number
+        description: The spot price of the stock.
