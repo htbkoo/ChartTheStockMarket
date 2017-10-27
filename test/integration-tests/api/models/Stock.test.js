@@ -9,10 +9,17 @@ describe('api', function () {
                 it('should create a Stock with underlyingId', function () {
                     //    given
                     //    when
-                    let stock = new Stock();
+                    let stock = new Stock("");
 
                     //    then
                     chai.expect(stock).to.be.an.instanceOf(Stock);
+                });
+
+                it('should throw error when creating a Stock with undefined underlyingId', function () {
+                    //    given
+                    //    when
+                    //    then
+                    chai.expect(()=>new Stock()).to.throw(TypeError);
                 });
             });
 
