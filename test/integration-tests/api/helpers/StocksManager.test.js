@@ -60,7 +60,8 @@ describe('api', function () {
                     chai.expect(existingView).to.be.an("object").that.is.empty;
 
                     //    when
-                    stocksManager.addStock({getUnderlyingId: () => "anId", spotPrice: 10});
+                    let aStock = new StubStockBuilder().setUnderlyingId("anId").withSpotPrice(10).build();
+                    stocksManager.addStock(aStock);
 
                     //    then
                     chai.expect(existingView).to.be.an("object").that.is.empty;
@@ -96,6 +97,8 @@ describe('api', function () {
             this.overrideMethod = method => ({
                 with(func) {
                     stock[method] = func;
+                    console.log(this.build());
+                    return this;
                 }
             });
 
