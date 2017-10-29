@@ -26,8 +26,8 @@
     "redux-devtools": "^3.4.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.2.3",
-    "sinon": "^3.2.1",
-    "sinon-test": "^2.1.0"
+    "sinon": "3.x.x",
+    "sinon-test": "2.1.x"
   },
   "scripts": {
     "start": "react-scripts start",
