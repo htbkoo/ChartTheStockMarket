@@ -36,6 +36,19 @@ describe('api', function () {
                         }
                     });
                 });
+
+                it('should not mutate the existing view of stocks after adding a stock by stocksManager.addStock', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    let existingView = stocksManager.getStocks();
+                    chai.expect(existingView).to.be.an("object").that.is.empty;
+
+                    //    when
+                    stocksManager.addStock({getUnderlyingId: () => "anId", spotPrice: 10});
+
+                    //    then
+                    chai.expect(existingView).to.be.an("object").that.is.empty;
+                });
             });
 
             describe('getStocksAsJsonResponse', function () {

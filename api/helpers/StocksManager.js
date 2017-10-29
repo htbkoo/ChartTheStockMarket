@@ -1,14 +1,16 @@
+import {Map} from "immutable";
+
 export default class StocksManager {
     constructor() {
-        const stocks = {};
+        let stocks = Map();
 
-        this.getStocks = () => stocks;
+        this.getStocks = () => stocks.toObject();
         this.addStock = stock => {
             let underlyingId = stock.getUnderlyingId(), spotPrice = stock.spotPrice;
-            stocks[underlyingId] = {
+            stocks = stocks.set(underlyingId, {
                 underlyingId,
                 spotPrice
-            }
+            });
         };
     }
 
