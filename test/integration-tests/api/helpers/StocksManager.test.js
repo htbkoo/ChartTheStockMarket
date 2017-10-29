@@ -6,7 +6,7 @@ describe('api', function () {
     describe('helpers', function () {
         describe('StocksManager', function () {
             describe('getStocks', function () {
-                it('should return an empty array when initalized', function () {
+                it('should return an empty object when initalized', function () {
                     //    given
                     let stocksManager = new StocksManager();
 
@@ -14,7 +14,7 @@ describe('api', function () {
                     let stocks = stocksManager.getStocks();
 
                     //    then
-                    chai.expect(stocks).to.be.an("array").that.is.empty
+                    chai.expect(stocks).to.be.an("object").that.is.empty
                 });
             });
 

@@ -1,6 +1,6 @@
 export default class StocksManager {
     constructor() {
-        const stocks = [];
+        const stocks = {};
 
         this.getStocks = () => stocks;
     }
