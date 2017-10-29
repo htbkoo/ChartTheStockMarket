@@ -18,6 +18,26 @@ describe('api', function () {
                 });
             });
 
+            describe('addStock', function () {
+                it('should add a stock when addStock', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
+
+                    //    when
+                    stocksManager.addStock({getUnderlyingId: () => "anId", spotPrice: 10});
+                    let stocks = stocksManager.getStocks();
+
+                    //    then
+                    chai.expect(stocks).to.deep.equal({
+                        anId: {
+                            underlyingId: "anId",
+                            spotPrice: 10
+                        }
+                    });
+                });
+            });
+
             describe('getStocksAsJsonResponse', function () {
                 it('should return an empty array when initalized', function () {
                     //    given
