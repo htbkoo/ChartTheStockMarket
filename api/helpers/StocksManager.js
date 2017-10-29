@@ -4,4 +4,8 @@ export default class StocksManager {
 
         this.getStocks = () => stocks;
     }
+
+    getStocksAsJsonResponse() {
+        return [];
+    }
 }
