@@ -1,7 +1,9 @@
+import StocksManager from "../helpers/StocksManager";
+
 (function () {
-    let stocks = [];
+    let stocksManager = new StocksManager();
     let getStocks = (req, res) => {
-        res.json([]);
+        res.json(stocksManager.getStocksAsJsonResponse());
     };
 
     module.exports = {
