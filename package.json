@@ -18,6 +18,8 @@
     "start-built": "babel-node ./build/bin/www",
     "debug-built": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
     "test-server": "mocha -r babel-register -r ignore-styles test/**/*.test.js --reporter spec",
+    "test-ui": "cd ./views/chart-the-stock-market-ui && npm run test-on-ci",
+    "test": "npm run test-ui && npm run test-server",
     "swagger-edit": "swagger project edit",
     "swagger-test": "swagger project test",
     "swagger-start": "swagger project start"
