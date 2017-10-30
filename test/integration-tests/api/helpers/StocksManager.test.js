@@ -67,6 +67,19 @@ describe('api', function () {
                     //    then
                     chai.expect(existingView).to.be.an("object").that.is.empty;
                 });
+
+                it('should not be able to add Stock with duplicated underlyingId', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    stocksManager.addStock(SAMPLE_STOCK);
+                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+
+                    //    when
+                    stocksManager.addStock(SAMPLE_STOCK);
+
+                    //    then
+                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+                });
             });
 
             describe('getStocksAsJsonResponse', function () {
