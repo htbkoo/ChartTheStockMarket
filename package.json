@@ -17,6 +17,7 @@
     "rebuild-debug": "npm run build-all && npm run debug",
     "start-built": "babel-node ./build/bin/www",
     "debug-built": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./build/bin/www",
+    "test-server": "mocha -r babel-register -r ignore-styles test/**/*.test.js --reporter spec",
     "swagger-edit": "swagger project edit",
     "swagger-test": "swagger project test",
     "swagger-start": "swagger project start"
