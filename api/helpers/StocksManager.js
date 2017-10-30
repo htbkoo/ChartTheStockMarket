@@ -8,7 +8,7 @@ export default class StocksManager {
 
         this.getStocks = () => stocks.toObject();
         this.addStock = stock => {
-            if (!(stock instanceof Stock)){
+            if (!(stock instanceof Stock)) {
                 throw new TypeError(`stock should be a Stock, but it is ${stock.constructor.name}`);
             }
 
@@ -21,6 +21,7 @@ export default class StocksManager {
     }
 
     getStocksAsJsonResponse() {
-        return [];
+        let stocks = this.getStocks();
+        return Object.keys(stocks).map(underlyingId => stocks[underlyingId]);
     }
 }

@@ -8,6 +8,8 @@ import Stock from "../../../../api/models/Stock";
 describe('api', function () {
     describe('helpers', function () {
         describe('StocksManager', function () {
+            const SAMPLE_STOCK = new StubStockBuilder().setUnderlyingId("anId").withSpotPrice(10).build();
+
             describe('getStocks', function () {
                 it('should return an empty object when initalized', function () {
                     //    given
@@ -60,8 +62,7 @@ describe('api', function () {
                     chai.expect(existingView).to.be.an("object").that.is.empty;
 
                     //    when
-                    let aStock = new StubStockBuilder().setUnderlyingId("anId").withSpotPrice(10).build();
-                    stocksManager.addStock(aStock);
+                    stocksManager.addStock(SAMPLE_STOCK);
 
                     //    then
                     chai.expect(existingView).to.be.an("object").that.is.empty;
@@ -78,6 +79,22 @@ describe('api', function () {
 
                     //    then
                     chai.expect(json).to.be.an("array").that.is.empty
+                });
+
+                it('should return transformed array for existing stocks', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    stocksManager.addStock(SAMPLE_STOCK);
+                    stocksManager.addStock(new StubStockBuilder().setUnderlyingId("anotherId").withSpotPrice(20).build());
+
+                    //    when
+                    let json = stocksManager.getStocksAsJsonResponse();
+
+                    //    then
+                    chai.expect(json).to.deep.equal([
+                        {underlyingId: "anId", spotPrice: 10},
+                        {underlyingId: "anotherId", spotPrice: 20},
+                    ]);
                 });
             });
         });
