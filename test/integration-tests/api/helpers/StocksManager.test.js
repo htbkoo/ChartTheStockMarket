@@ -71,13 +71,15 @@ describe('api', function () {
                 it('should not be able to add Stock with duplicated underlyingId', function () {
                     //    given
                     let stocksManager = new StocksManager();
-                    stocksManager.addStock(SAMPLE_STOCK);
+                    let addResult = stocksManager.addStock(SAMPLE_STOCK);
+                    chai.expect(addResult.added).to.equal(true);
                     chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
 
                     //    when
-                    stocksManager.addStock(SAMPLE_STOCK);
+                    addResult = stocksManager.addStock(SAMPLE_STOCK);
 
                     //    then
+                    chai.expect(addResult.added).to.equal(false);
                     chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
                 });
             });
