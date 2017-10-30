@@ -84,6 +84,7 @@ describe('api', function () {
 
         function StubStockBuilder() {
             let stock = sinon.createStubInstance(Stock);
+            const builderThis = this;
 
             this.build = () => stock;
             this.withSpotPrice = spotPrice => {
@@ -97,8 +98,7 @@ describe('api', function () {
             this.overrideMethod = method => ({
                 with(func) {
                     stock[method] = func;
-                    console.log(this.build());
-                    return this;
+                    return builderThis;
                 }
             });
 
