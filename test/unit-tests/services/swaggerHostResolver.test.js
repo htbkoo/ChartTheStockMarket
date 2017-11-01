@@ -5,10 +5,6 @@ import swaggerHostResolver from "../../../services/swaggerHostResolver";
 const originalProcessEnv = process.env;
 
 describe('services', function () {
-    function cloneOf(obj) {
-        return {...obj};
-    }
-
     describe("swaggerHostResolver", function () {
         beforeEach(function () {
             if (originalProcessEnv) {
@@ -150,4 +146,8 @@ describe('services', function () {
             });
         });
     });
+
+    function cloneOf(obj) {
+        return {...obj};
+    }
 });
