@@ -35,5 +35,17 @@ describe('api', function () {
                 });
             });
         });
+
+        describe('asJson', function () {
+            it('should expose stock.asJson() to transform stock to json', function () {
+                //    given
+                //    when
+                const underlyingId = "someId";
+                let stock = new Stock(underlyingId);
+
+                //    then
+                chai.expect(stock.asJson()).to.deep.equal({underlyingId});
+            });
+        });
     });
 });

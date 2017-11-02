@@ -6,6 +6,12 @@ class Stock {
 
         this.getUnderlyingId = () => underlyingId;
     }
+
+    asJson(){
+        return {
+            underlyingId: this.getUnderlyingId()
+        };
+    }
 }
 
 module.exports = Stock;
