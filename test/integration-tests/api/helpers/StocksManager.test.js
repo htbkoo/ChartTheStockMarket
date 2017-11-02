@@ -8,7 +8,7 @@ import Stock from "../../../../api/models/Stock";
 describe('api', function () {
     describe('helpers', function () {
         describe('StocksManager', function () {
-            const SAMPLE_STOCK = new StubStockBuilder().setUnderlyingId("anId").withSpotPrice(10).build();
+            const SAMPLE_STOCK = new StubStockBuilder().withUnderlyingId("anId").withSpotPrice(10).build();
 
             describe('getStocks', function () {
                 it('should return an empty object when initalized', function () {
@@ -31,7 +31,7 @@ describe('api', function () {
 
                     //    when
                     let underlyingId = "anId", spotPrice = 10;
-                    let stock = new StubStockBuilder().setUnderlyingId(underlyingId).withSpotPrice(spotPrice).build();
+                    let stock = new StubStockBuilder().withUnderlyingId(underlyingId).withSpotPrice(spotPrice).build();
                     stocksManager.addStock(stock);
                     let stocks = stocksManager.getStocks();
 
@@ -100,7 +100,7 @@ describe('api', function () {
                     //    given
                     let stocksManager = new StocksManager();
                     stocksManager.addStock(SAMPLE_STOCK);
-                    stocksManager.addStock(new StubStockBuilder().setUnderlyingId("anotherId").withSpotPrice(20).build());
+                    stocksManager.addStock(new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build());
 
                     //    when
                     let json = stocksManager.getStocksAsJsonResponse();
@@ -116,23 +116,21 @@ describe('api', function () {
 
         function StubStockBuilder() {
             let stock = sinon.createStubInstance(Stock);
-            const builderThis = this;
+            let properties = {};
 
-            this.build = () => stock;
+            this.build = () => {
+                stock.asJson = () => Object.assign({}, properties);
+                return stock;
+            };
             this.withSpotPrice = spotPrice => {
-                stock.spotPrice = spotPrice;
+                properties.spotPrice = spotPrice;
                 return this;
             };
-            this.setUnderlyingId = id => {
+            this.withUnderlyingId = id => {
                 stock.getUnderlyingId = () => id;
+                properties.underlyingId = id;
                 return this;
             };
-            this.overrideMethod = method => ({
-                with(func) {
-                    stock[method] = func;
-                    return builderThis;
-                }
-            });
 
             return this;
         }

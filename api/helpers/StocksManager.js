@@ -11,15 +11,12 @@ class StocksManager {
             if (!(stock instanceof Stock)) {
                 throw new TypeError(`stock should be a Stock, but it is ${stock.constructor.name}`);
             }
-            let underlyingId = stock.getUnderlyingId(), spotPrice = stock.spotPrice;
+            let underlyingId = stock.getUnderlyingId();
             if (stocks.has(underlyingId)) {
                 return createAddResult(false);
             }
 
-            stocks = stocks.set(underlyingId, {
-                underlyingId,
-                spotPrice
-            });
+            stocks = stocks.set(underlyingId, stock.asJson());
 
             return createAddResult(true);
         };
