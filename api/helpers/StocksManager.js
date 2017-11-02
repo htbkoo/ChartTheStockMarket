@@ -1,8 +1,8 @@
-import {Map} from "immutable";
+let Map = require("immutable").Map;
 
-import Stock from "../models/Stock";
+let Stock = require("../models/Stock");
 
-export default class StocksManager {
+class StocksManager {
     constructor() {
         let stocks = Map();
 
@@ -36,3 +36,5 @@ function createAddResult(added) {
         added
     }
 }
+
+module.exports = StocksManager;

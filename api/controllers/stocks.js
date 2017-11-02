@@ -1,4 +1,4 @@
-import StocksManager from "../helpers/StocksManager";
+let StocksManager = require("../helpers/StocksManager");
 
 (function () {
     let stocksManager = new StocksManager();

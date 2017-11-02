@@ -1,9 +1,11 @@
-export default class Stock {
+class Stock {
     constructor(underlyingId) {
-        if (typeof underlyingId==="undefined"){
+        if (typeof underlyingId === "undefined") {
             throw new TypeError("underlyingId must not be undefined")
         }
 
         this.getUnderlyingId = () => underlyingId;
     }
 }
+
+module.exports = Stock;
