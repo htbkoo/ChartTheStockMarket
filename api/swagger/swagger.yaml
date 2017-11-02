@@ -60,6 +60,30 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /stocks/add/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: stocks
+    post:
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          type: string
+          description: The underlying ID.
+      description: Add a stock to the list
+      # used as the method name of the controller
+      operationId: addStock
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/StockAdditionResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -74,6 +98,12 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Stocks"
+  StockAdditionResponse:
+    required:
+      - added
+    properties:
+      added:
+        type: boolean
   ErrorResponse:
     required:
       - message
