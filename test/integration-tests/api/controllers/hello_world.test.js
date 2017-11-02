@@ -12,8 +12,7 @@ describe('api', function () {
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
                         .expect(200)
-                        .then(function (err, res) {
-                            should.not.exist(err);
+                        .then(res => {
                             res.body.should.eql('Hello, stranger!');
                         });
                 });
@@ -25,8 +24,7 @@ describe('api', function () {
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
                         .expect(200)
-                        .then(function (err, res) {
-                            should.not.exist(err);
+                        .then(res => {
                             res.body.should.eql('Hello, Scott!');
                         });
                 });
