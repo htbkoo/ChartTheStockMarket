@@ -1,9 +1,11 @@
 import chai from "chai";
 import request from "supertest";
-import {sinonTest} from "../../../test-utils/sinonWithSinonTest";
+import {sinon, sinonTest} from "../../../test-utils/sinonWithSinonTest";
 
 import server from "../../../../app";
 import StocksManager from "../../../../api/helpers/StocksManager";
+
+import Stock from "../../../../api/models/Stock";
 
 describe('api', function () {
     describe('controllers', function () {
@@ -45,13 +47,38 @@ describe('api', function () {
                         });
                 }));
             });
+
+            describe('POST /stocks/add/{id}', function () {
+                it('should return {added: true} when successfully added', sinonTest(function () {
+                    let added = true;
+                    const underlyingId = "someId",
+                        expectedResponse = {added},
+                        matchStock = sinon.match(val => val instanceof Stock && underlyingId === val.getUnderlyingId());
+                    stubStocksManager().whenAddStock(matchStock).toReturnResponse.call(this, added);
+
+                    return request(server)
+                        .post(`/stocks/add/${underlyingId}`)
+                        .set('Content-Type', 'application/json')
+                        .then(res =>
+                            chai.expect(res.body).to.deep.equal(expectedResponse)
+                        );
+                }));
+            });
         });
 
         function stubStocksManager() {
             return {
                 toReturnJsonResponse(stocks) {
                     return this.stub(StocksManager.prototype, "getStocksAsJsonResponse").returns(stocks);
-                }
+                },
+                whenAddStock(stock) {
+                    return {
+                        toReturnResponse(added) {
+                            return this.stub(StocksManager.prototype, "addStock").withArgs(stock).returns({added});
+                        }
+
+                    }
+                },
             }
         }
     });
