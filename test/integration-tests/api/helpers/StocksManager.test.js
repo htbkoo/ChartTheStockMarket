@@ -49,7 +49,7 @@ describe('api', function () {
                     let stocksManager = new StocksManager();
 
                     //    when
-                    let addingNonStock = stocksManager.addStock.bind(this, "anything not a Stock");
+                    let addingNonStock = stocksManager.addStock.bind(stocksManager, "anything not a Stock");
 
                     //    then
                     chai.expect(addingNonStock).to.throw(TypeError, /should be a Stock/);
