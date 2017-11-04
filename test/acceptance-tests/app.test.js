@@ -46,5 +46,16 @@ describe('routes', function () {
                     .expect([]);
             });
         });
+
+        describe('POST /stocks/add/{id}', function () {
+            it('should return {added: true} for POST /stocks/add/{id} at initial state', function () {
+                return request(server)
+                    .post('/stocks/add/someId')
+                    .set('Content-Type', 'application/json')
+                    .expect(200)
+                    .expect('Content-Type', /application\/json/)
+                    .expect({added: true});
+            });
+        });
     });
 });
