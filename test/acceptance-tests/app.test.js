@@ -35,5 +35,16 @@ describe('routes', function () {
                     .expect(/Redirecting to <a href="\/docs\/">\/docs\/<\/a>/);
             });
         });
+
+        describe('GET /stocks', function () {
+            it('should return [] for GET /stocks at initial state', function () {
+                return request(server)
+                    .get('/stocks')
+                    .set('Accept', 'application/json')
+                    .expect(200)
+                    .expect('Content-Type', /application\/json/)
+                    .expect([]);
+            });
+        });
     });
 });
