@@ -83,11 +83,7 @@ definitions:
   Stocks:
     required:
       - underlyingId
-      - spotPrice
     properties:
       underlyingId:
         type: string
         description: The ID for the stock instrument.
-      spotPrice:
-        type: number
-        description: The spot price of the stock.

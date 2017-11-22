@@ -1,9 +1,13 @@
 let request = require('supertest');
 let chai = require("chai");
-
-let server = require('../../app');
-
+let server;
 describe('routes', function () {
+    beforeEach(function () {
+        delete require.cache[require.resolve('../../app')];
+        require.cache = {};
+        server = require('../../app');
+    });
+
     describe("index", function () {
         describe('GET /', function () {
             it('should return a html response', function () {
@@ -45,17 +49,36 @@ describe('routes', function () {
                     .expect('Content-Type', /application\/json/)
                     .expect([]);
             });
+
+            it('should return [stock...] for GET /stocks after adding stocks', function () {
+                let underlyingId = "someId";
+
+                return addStock(underlyingId)
+                    .then(res =>
+                        request(server)
+                            .get('/stocks')
+                            .set('Accept', 'application/json')
+                            .expect(200)
+                            .expect('Content-Type', /application\/json/)
+                            .expect([{underlyingId}])
+                    )
+            });
         });
 
         describe('POST /stocks/add/{id}', function () {
-            it('should return {added: true} for POST /stocks/add/{id} at initial state', function () {
-                return request(server)
-                    .post('/stocks/add/someId')
-                    .set('Content-Type', 'application/json')
+            // TODO: to enable this test after resolving the multiple tests global state problem
+            xit('should return {added: true} for POST /stocks/add/{id} at initial state', function () {
+                return addStock("someId")
                     .expect(200)
                     .expect('Content-Type', /application\/json/)
                     .expect({added: true});
             });
         });
     });
+
+    function addStock(id) {
+        return request(server)
+            .post(`/stocks/add/${id}`)
+            .set('Content-Type', 'application/json');
+    }
 });
