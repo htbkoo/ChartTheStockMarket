@@ -20,6 +20,21 @@ class StocksManager {
 
             return createAddResult(true);
         };
+
+        this._removeStock = stockId => {
+            // if (!(stock instanceof Stock)) {
+            //     throw new TypeError(`stock should be a Stock, but it is ${stock.constructor.name}`);
+            // }
+            // let underlyingId = stock.getUnderlyingId();
+            // if (stocks.has(underlyingId)) {
+            //     return createAddResult(false);
+            // }
+            stocks = Map();
+
+            return {
+                removed: true
+            };
+        };
     }
 
     getStocksAsJsonResponse() {
@@ -29,6 +44,10 @@ class StocksManager {
 
     addStock(stock){
         return this._addStock(stock);
+    }
+
+    removeStock(stockId){
+        return this._removeStock(stockId);
     }
 }
 

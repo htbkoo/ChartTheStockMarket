@@ -83,6 +83,24 @@ describe('api', function () {
                 });
             });
 
+            describe('removeStock', function () {
+                it('should remove a stock when removeStock and stock exist', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    stocksManager.addStock(SAMPLE_STOCK);
+
+                    //    when
+                    let removeResult = stocksManager.removeStock(UNDERLYING_ID);
+
+                    //    then
+                    chai.expect(removeResult).to.deep.equal({
+                        removed: true
+                    });
+                    chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
+
+                });
+            });
+
             describe('getStocksAsJsonResponse', function () {
                 it('should return an empty array when initalized', function () {
                     //    given
