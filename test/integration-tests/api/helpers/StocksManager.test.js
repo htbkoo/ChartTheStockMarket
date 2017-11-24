@@ -8,7 +8,8 @@ import Stock from "../../../../api/models/Stock";
 describe('api', function () {
     describe('helpers', function () {
         describe('StocksManager', function () {
-            const SAMPLE_STOCK = new StubStockBuilder().withUnderlyingId("anId").withSpotPrice(10).build();
+            const UNDERLYING_ID = "anId", SPOT_PRICE = 10;
+            const SAMPLE_STOCK = new StubStockBuilder().withUnderlyingId(UNDERLYING_ID).withSpotPrice(SPOT_PRICE).build();
 
             describe('getStocks', function () {
                 it('should return an empty object when initalized', function () {
@@ -30,16 +31,14 @@ describe('api', function () {
                     chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
 
                     //    when
-                    let underlyingId = "anId", spotPrice = 10;
-                    let stock = new StubStockBuilder().withUnderlyingId(underlyingId).withSpotPrice(spotPrice).build();
-                    stocksManager.addStock(stock);
+                    stocksManager.addStock(SAMPLE_STOCK);
                     let stocks = stocksManager.getStocks();
 
                     //    then
                     chai.expect(stocks).to.deep.equal({
-                        [underlyingId]: {
-                            underlyingId,
-                            spotPrice
+                        [UNDERLYING_ID]: {
+                            underlyingId: UNDERLYING_ID,
+                            spotPrice: SPOT_PRICE
                         }
                     });
                 });
