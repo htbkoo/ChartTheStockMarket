@@ -97,7 +97,21 @@ describe('api', function () {
                         removed: true
                     });
                     chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
+                });
 
+                it('should only remove the specific Stock without afffecting other stock', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    stocksManager.addStock(SAMPLE_STOCK);
+                    stocksManager.addStock(new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build());
+                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(2);
+
+                    //    when
+                    let removeResult = stocksManager.removeStock("anotherId");
+
+                    //    then
+                    chai.expect(removeResult.removed).to.equal(true);
+                    chai.expect(stocksManager.getStocks()).to.have.own.property(UNDERLYING_ID);
                 });
             });
 
