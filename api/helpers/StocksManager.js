@@ -22,6 +22,11 @@ class StocksManager {
         };
 
         this._removeStock = underlyingId => {
+            if (!stocks.has(underlyingId)) {
+                return {
+                    removed: false
+                };
+            }
             stocks = stocks.remove(underlyingId);
             return {
                 removed: true

@@ -113,6 +113,20 @@ describe('api', function () {
                     chai.expect(removeResult.removed).to.equal(true);
                     chai.expect(stocksManager.getStocks()).to.have.own.property(UNDERLYING_ID);
                 });
+
+                it('should return {removed:false} if underlyingId does not exist', function () {
+                    //    given
+                    let stocksManager = new StocksManager();
+                    stocksManager.addStock(SAMPLE_STOCK);
+                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+
+                    //    when
+                    let removeResult = stocksManager.removeStock("anotherId");
+
+                    //    then
+                    chai.expect(removeResult.removed).to.equal(false);
+                    chai.expect(stocksManager.getStocks()).to.have.own.property(UNDERLYING_ID);
+                });
             });
 
             describe('getStocksAsJsonResponse', function () {
