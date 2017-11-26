@@ -64,6 +64,23 @@ describe('api', function () {
                         );
                 }));
             });
+
+            describe('DELETE /stocks/remove/{id}', function () {
+                it('should return {removed: true} when successfully removed', sinonTest(function () {
+                    let removed = true;
+                    const underlyingId = "someId",
+                        expectedResponse = {removed},
+                        matchStockId = sinon.match(val => val === underlyingId);
+                    stubStocksManager().whenRemoveStock(matchStockId).toReturnResponse.call(this, removed);
+
+                    return request(server)
+                        .del(`/stocks/remove/${underlyingId}`)
+                        .set('Content-Type', 'application/json')
+                        .then(res =>
+                            chai.expect(res.body).to.deep.equal(expectedResponse)
+                        );
+                }));
+            });
         });
 
         function stubStocksManager() {
@@ -75,6 +92,14 @@ describe('api', function () {
                     return {
                         toReturnResponse(added) {
                             return this.stub(StocksManager.prototype, "addStock").withArgs(stock).returns({added});
+                        }
+
+                    }
+                },
+                whenRemoveStock(matcher) {
+                    return {
+                        toReturnResponse(removed) {
+                            return this.stub(StocksManager.prototype, "removeStock").withArgs(matcher).returns({removed});
                         }
 
                     }

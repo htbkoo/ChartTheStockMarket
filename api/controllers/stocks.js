@@ -13,8 +13,14 @@ let Stock = require("../models/Stock");
         res.json(stocksManager.addStock(new Stock(id)));
     };
 
+    let removeStock = (req, res) => {
+        let id = req.swagger.params.id.value;
+        res.json(stocksManager.removeStock(id));
+    };
+
     module.exports = {
         getStocks,
-        addStock
+        addStock,
+        removeStock
     }
 }());

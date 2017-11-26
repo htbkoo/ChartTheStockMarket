@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "0.2.0"
+  version: "0.3.0"
   title: FreeCodeCamp - Chart the Stock Market (Hey)
 # during dev, should point to your local machine
 host: localhost:3000
@@ -60,6 +60,30 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /stocks/remove/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: stocks
+    delete:
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          type: string
+          description: The underlying ID.
+      description: Remove a stock from the list
+      # used as the method name of the controller
+      operationId: removeStock
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/StockRemovalResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -73,6 +97,12 @@ definitions:
       - added
     properties:
       added:
+        type: boolean
+  StockRemovalResponse:
+    required:
+      - removed
+    properties:
+      removed:
         type: boolean
   ErrorResponse:
     required:
