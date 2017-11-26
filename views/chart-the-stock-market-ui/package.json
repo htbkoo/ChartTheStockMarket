@@ -37,6 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test-on-ci": "set CI=true && npm test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test-mocha": "mocha -r ./test/setupMocha -r babel-register -r ignore-styles test/**/*.test.{js,jsx}"
   }
 }
