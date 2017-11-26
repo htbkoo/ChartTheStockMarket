@@ -6,11 +6,11 @@ import chai from '../test-util/chaiWithEnzyme';
 import {matchAction} from '../test-util/matchingHelper';
 import sinon from '../test-util/sinonWithSinonTest';
 
-import StockListContainer, {mapDispatchToProps} from 'src/components/StockListContainer.jsx';
+import StockListContainer, {mapDispatchToProps} from 'components/StockListContainer.jsx';
 
-import StockList from 'src/components/StockList.jsx';
-import * as reduxActions from 'src/redux/reduxActions';
-import StocksModel from "src/components/model/StocksModel";
+import StockList from 'components/StockList.jsx';
+import * as reduxActions from 'redux/reduxActions';
+import StocksModel from "components/model/StocksModel";
 
 describe("StockListContainer", function () {
     describe("rendering", function () {

@@ -3,11 +3,11 @@ import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 import {List, Map} from 'immutable';
 
-import StockList from 'src/components/StockList.jsx';
+import StockList from 'components/StockList.jsx';
 
-import Stock from 'src/components/Stock.jsx';
-import DisplayFrame from 'src/components/DisplayFrame.jsx';
-import StocksModel from "src/components/model/StocksModel";
+import Stock from 'components/Stock.jsx';
+import DisplayFrame from 'components/DisplayFrame.jsx';
+import StocksModel from "components/model/StocksModel";
 
 describe("integration test - StockList", function () {
     it('should have a list of <DisplayFrame/> with onRemoveStock, child=stock and className=StockDisplayFrame in <StockList stocksModel/>', () => {

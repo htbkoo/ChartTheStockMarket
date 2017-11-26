@@ -2,9 +2,9 @@ import chai from "chai";
 import chaiImmutable from "chai-immutable";
 import {List, Map} from "immutable";
 
-import reducers from "src/redux/reduxReducers";
-import types from "src/redux/actionTypes";
-import StocksModel from "src/components/model/StocksModel";
+import reducers from "redux/reduxReducers";
+import types from "redux/actionTypes";
+import StocksModel from "components/model/StocksModel";
 
 chai.use(chaiImmutable);
 

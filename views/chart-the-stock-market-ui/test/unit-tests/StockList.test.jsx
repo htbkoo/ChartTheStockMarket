@@ -3,8 +3,8 @@ import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 import sinon from '../test-util/sinonWithSinonTest';
 
-import StockList from 'src/components/StockList.jsx';
-import StocksModel from "src/components/model/StocksModel";
+import StockList from 'components/StockList.jsx';
+import StocksModel from "components/model/StocksModel";
 
 describe("StockList", function () {
     it(`should have propTypes for stocksModel of type StocksModel and contain stocksModel.asSortableComponents()`, sinon.test(function () {

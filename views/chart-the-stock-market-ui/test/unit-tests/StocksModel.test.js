@@ -5,11 +5,11 @@ import {shallow} from 'enzyme';
 import {List} from 'immutable';
 import React, {Component} from 'react';
 
-import StocksModel from 'src/components/model/StocksModel';
+import StocksModel from 'components/model/StocksModel';
 
-import {SortableItem, SortableList} from 'src/components/SortableComponents';
-import DisplayFrame from 'src/components/DisplayFrame';
-import Stock from 'src/components/Stock';
+import {SortableItem, SortableList} from 'components/SortableComponents';
+import DisplayFrame from 'components/DisplayFrame';
+import Stock from 'components/Stock';
 
 chai.use(chaiImmutable);
 chai.use(chaiEnzyme());

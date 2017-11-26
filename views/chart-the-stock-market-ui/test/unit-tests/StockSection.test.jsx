@@ -2,11 +2,11 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 
-import StockSection from 'src/components/StockSection.jsx';
+import StockSection from 'components/StockSection.jsx';
 
-import StockListContainer from 'src/components/StockListContainer.jsx';
-import StockControls from 'src/components/StockControls.jsx';
-import DisplayFrame from 'src/components/DisplayFrame.jsx';
+import StockListContainer from 'components/StockListContainer.jsx';
+import StockControls from 'components/StockControls.jsx';
+import DisplayFrame from 'components/DisplayFrame.jsx';
 
 describe("StockSection", function () {
     it('should have a <StockListContainer /> and <DisplayFrame child={<StockControls />}/> in <StockSection />', () => {

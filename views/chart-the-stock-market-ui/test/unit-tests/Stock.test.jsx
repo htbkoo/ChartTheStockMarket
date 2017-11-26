@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 
-import Stock from 'src/components/Stock.jsx';
+import Stock from 'components/Stock.jsx';
 
 describe("Stock", function () {
     it('should have child <div class="StockText">{props.stock}</div>', () => {
