@@ -1,4 +1,4 @@
-import types from "./actionTypes"
+import {types} from "./reduxActions"
 import {Map, List} from 'immutable';
 import StocksModel from "../components/model/StocksModel";
 

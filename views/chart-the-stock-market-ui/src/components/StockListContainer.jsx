@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import * as actions from '../redux/reduxActions';
+import {actions} from '../redux/reduxActions';
 import stringHelper from '../utils/stringHelper';
 import StockList from './StockList';
 

@@ -1,7 +1,6 @@
 import chai from "chai";
 
-import * as actions from "redux/reduxActions";
-import types from "redux/actionTypes";
+import {actions, types} from "redux/reduxActions";
 
 describe("reduxActions", function () {
     it("should create an action to add a stock", function () {

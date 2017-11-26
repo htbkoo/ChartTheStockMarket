@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 import storeHelper from '../test-util/reduxStoreHelper';
 import {matchAction} from '../test-util/matchingHelper';
-import {addStock} from 'redux/reduxActions';
+import {actions} from 'redux/reduxActions';
 import keycodeHelper from 'utils/keycodeHelper'
 import sinon from '../test-util/sinonWithSinonTest';
 
@@ -62,7 +62,7 @@ describe("StockControls", function () {
         getInput().simulate("keyUp", keycodeHelper.constants.ENTER);
 
         // then
-        chai.expect(dispatchSpy.calledWith(matchAction(addStock(underlyingId)))).to.be.true;
+        chai.expect(dispatchSpy.calledWith(matchAction(actions.addStock(underlyingId)))).to.be.true;
         chai.expect(wrapper).to.have.state('inputValue', "");
     }));
 
