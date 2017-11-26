@@ -28,7 +28,7 @@ describe('api', function () {
                 it('should add a stock when addStock', function () {
                     //    given
                     let stocksManager = new StocksManager();
-                    chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
+                    assertStocks(stocksManager.getStocks()).isEmpty();
 
                     //    when
                     stocksManager.addStock(SAMPLE_STOCK);
@@ -86,8 +86,7 @@ describe('api', function () {
             describe('removeStock', function () {
                 it('should remove a stock when removeStock and stock exist', function () {
                     //    given
-                    let stocksManager = new StocksManager();
-                    stocksManager.addStock(SAMPLE_STOCK);
+                    let stocksManager = newStocksManager(SAMPLE_STOCK);
 
                     //    when
                     let removeResult = stocksManager.removeStock(UNDERLYING_ID);
@@ -101,9 +100,8 @@ describe('api', function () {
 
                 it('should only remove the specific Stock without afffecting other stock', function () {
                     //    given
-                    let stocksManager = new StocksManager();
-                    stocksManager.addStock(SAMPLE_STOCK);
-                    stocksManager.addStock(new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build());
+                    let anotherStock = new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build();
+                    let stocksManager = newStocksManager([SAMPLE_STOCK, anotherStock]);
                     assertStocks(stocksManager.getStocks()).hasLength(2);
 
                     //    when
@@ -116,8 +114,7 @@ describe('api', function () {
 
                 it('should return {removed:false} if underlyingId does not exist', function () {
                     //    given
-                    let stocksManager = new StocksManager();
-                    stocksManager.addStock(SAMPLE_STOCK);
+                    let stocksManager = newStocksManager(SAMPLE_STOCK);
                     assertStocks(stocksManager.getStocks()).hasLength(1);
 
                     //    when
@@ -143,9 +140,9 @@ describe('api', function () {
 
                 it('should return transformed array for existing stocks', function () {
                     //    given
-                    let stocksManager = new StocksManager();
-                    stocksManager.addStock(SAMPLE_STOCK);
-                    stocksManager.addStock(new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build());
+                    let anotherStock = new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build();
+                    let stocksManager = newStocksManager([SAMPLE_STOCK, anotherStock]);
+                    assertStocks(stocksManager.getStocks()).hasLength(2);
 
                     //    when
                     let json = stocksManager.getStocksAsJsonResponse();
@@ -182,13 +179,23 @@ describe('api', function () {
 
         function assertStocks(stocks) {
             return {
-                isEmpty(){
+                isEmpty() {
                     return chai.expect(stocks).to.be.an("object").that.is.empty;
                 },
-                hasLength(length){
+                hasLength(length) {
                     return chai.expect(Object.keys(stocks)).to.have.lengthOf(length);
                 }
             }
+        }
+
+        function newStocksManager(stocks = []) {
+            let stocksManager = new StocksManager();
+            if (Array.isArray(stocks)) {
+                stocks.forEach(stock => stocksManager.addStock(stock));
+            } else {
+                stocksManager.addStock(stocks);
+            }
+            return stocksManager;
         }
     });
 });
