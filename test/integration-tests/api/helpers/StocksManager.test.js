@@ -72,14 +72,14 @@ describe('api', function () {
                     let stocksManager = new StocksManager();
                     let addResult = stocksManager.addStock(SAMPLE_STOCK);
                     chai.expect(addResult.added).to.equal(true);
-                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+                    assertStocks(stocksManager.getStocks()).hasLength(1);
 
                     //    when
                     addResult = stocksManager.addStock(SAMPLE_STOCK);
 
                     //    then
                     chai.expect(addResult.added).to.equal(false);
-                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+                    assertStocks(stocksManager.getStocks()).hasLength(1);
                 });
             });
 
@@ -104,7 +104,7 @@ describe('api', function () {
                     let stocksManager = new StocksManager();
                     stocksManager.addStock(SAMPLE_STOCK);
                     stocksManager.addStock(new StubStockBuilder().withUnderlyingId("anotherId").withSpotPrice(20).build());
-                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(2);
+                    assertStocks(stocksManager.getStocks()).hasLength(2);
 
                     //    when
                     let removeResult = stocksManager.removeStock("anotherId");
@@ -118,7 +118,7 @@ describe('api', function () {
                     //    given
                     let stocksManager = new StocksManager();
                     stocksManager.addStock(SAMPLE_STOCK);
-                    chai.expect(Object.keys(stocksManager.getStocks())).to.have.lengthOf(1);
+                    assertStocks(stocksManager.getStocks()).hasLength(1);
 
                     //    when
                     let removeResult = stocksManager.removeStock("anotherId");
@@ -184,6 +184,9 @@ describe('api', function () {
             return {
                 isEmpty(){
                     return chai.expect(stocks).to.be.an("object").that.is.empty;
+                },
+                hasLength(length){
+                    return chai.expect(Object.keys(stocks)).to.have.lengthOf(length);
                 }
             }
         }
