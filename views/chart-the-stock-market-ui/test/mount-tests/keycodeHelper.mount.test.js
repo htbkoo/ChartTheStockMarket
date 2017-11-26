@@ -1,7 +1,7 @@
 import chai from 'chai';
 import $ from 'jquery';
 
-import keycodeHelper from '../utils/keycodeHelper';
+import keycodeHelper from 'src/utils/keycodeHelper';
 
 describe("mount test - keycodeHelper", function () {
     describe("for Event Case (with rewire)", function () {

@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import stringHelper from '../utils/stringHelper';
+import stringHelper from 'src/utils/stringHelper';
 
 describe("stringHelper", function () {
     describe("mapping listener (onAction) to redux actions (action)", function () {

@@ -1,11 +1,11 @@
 import chai from "chai";
 import sinon from "../test-util/sinonWithSinonTest";
 
-import dataLoader from "../services/dataLoader";
+import dataLoader from "src/services/dataLoader";
 
-import envVarRetriever from "../services/envVarRetriever";
-import externalStocksDataProvider from "../services/externalStocksDataProvider";
-import mockStocksDataProvider from "../services/mockStocksDataProvider";
+import envVarRetriever from "src/services/envVarRetriever";
+import externalStocksDataProvider from "src/services/externalStocksDataProvider";
+import mockStocksDataProvider from "src/services/mockStocksDataProvider";
 
 describe("dataLoader", function () {
     let ENV_VAR_KEY = {USE_MOCK_DATA_KEY: "REACT_APP_USE_MOCK_DATA"};

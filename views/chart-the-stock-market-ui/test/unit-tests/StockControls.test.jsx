@@ -3,11 +3,11 @@ import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 import storeHelper from '../test-util/reduxStoreHelper';
 import {matchAction} from '../test-util/matchingHelper';
-import {addStock} from '../redux/reduxActions';
-import keycodeHelper from '../utils/keycodeHelper'
+import {addStock} from 'src/redux/reduxActions';
+import keycodeHelper from 'src/utils/keycodeHelper'
 import sinon from '../test-util/sinonWithSinonTest';
 
-import StockControlsContainer, {StockControls} from '../components/StockControls.jsx';
+import StockControlsContainer, {StockControls} from 'src/components/StockControls.jsx';
 
 describe("StockControls", function () {
     it('should render the connected(StockControls) component', () => {

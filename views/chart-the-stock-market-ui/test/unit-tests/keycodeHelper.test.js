@@ -1,7 +1,7 @@
 import chai from 'chai';
 import keycode from 'keycode';
 
-import keycodeHelper from '../utils/keycodeHelper';
+import keycodeHelper from 'src/utils/keycodeHelper';
 
 describe("keycodeHelper", function () {
     describe("constants", function () {

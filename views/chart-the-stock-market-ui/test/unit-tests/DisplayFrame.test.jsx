@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 
-import DisplayFrame from '../components/DisplayFrame.jsx';
+import DisplayFrame from 'src/components/DisplayFrame.jsx';
 
 describe("DisplayFrame", function () {
     it('should have children <div>{props.children}</div>', () => {

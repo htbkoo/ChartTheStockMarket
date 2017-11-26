@@ -4,8 +4,8 @@ import {mount} from 'enzyme';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import App from '../App.jsx';
-import StocksModel from "../components/model/StocksModel";
+import App from 'src/App.jsx';
+import StocksModel from "src/components/model/StocksModel";
 
 describe("mount test - App", function () {
     beforeEach(() => require('./setup.jsx'));

@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import chai from '../test-util/chaiWithEnzyme';
 
-import {SortableList, SortableItem} from '../components/SortableComponents.jsx';
+import {SortableList, SortableItem} from 'src/components/SortableComponents.jsx';
 
 describe("SortableComponents", function () {
     describe("SortableList", function () {
