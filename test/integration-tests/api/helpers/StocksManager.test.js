@@ -20,7 +20,7 @@ describe('api', function () {
                     let stocks = stocksManager.getStocks();
 
                     //    then
-                    assertStocksIsEmpty(stocks);
+                    assertStocks(stocks).isEmpty();
                 });
             });
 
@@ -58,13 +58,13 @@ describe('api', function () {
                     //    given
                     let stocksManager = new StocksManager();
                     let existingView = stocksManager.getStocks();
-                    assertStocksIsEmpty(existingView);
+                    assertStocks(existingView).isEmpty();
 
                     //    when
                     stocksManager.addStock(SAMPLE_STOCK);
 
                     //    then
-                    assertStocksIsEmpty(existingView);
+                    assertStocks(existingView).isEmpty();
                 });
 
                 it('should not be able to add Stock with duplicated underlyingId', function () {
@@ -96,7 +96,7 @@ describe('api', function () {
                     chai.expect(removeResult).to.deep.equal({
                         removed: true
                     });
-                    assertStocksIsEmpty(stocksManager.getStocks());
+                    assertStocks(stocksManager.getStocks()).isEmpty();
                 });
 
                 it('should only remove the specific Stock without afffecting other stock', function () {
@@ -180,8 +180,12 @@ describe('api', function () {
             return this;
         }
 
-        function assertStocksIsEmpty(stocks) {
-            return chai.expect(stocks).to.be.an("object").that.is.empty;
+        function assertStocks(stocks) {
+            return {
+                isEmpty(){
+                    return chai.expect(stocks).to.be.an("object").that.is.empty;
+                }
+            }
         }
     });
 });
