@@ -20,7 +20,7 @@ describe('api', function () {
                     let stocks = stocksManager.getStocks();
 
                     //    then
-                    chai.expect(stocks).to.be.an("object").that.is.empty
+                    assertStocksIsEmpty(stocks);
                 });
             });
 
@@ -58,13 +58,13 @@ describe('api', function () {
                     //    given
                     let stocksManager = new StocksManager();
                     let existingView = stocksManager.getStocks();
-                    chai.expect(existingView).to.be.an("object").that.is.empty;
+                    assertStocksIsEmpty(existingView);
 
                     //    when
                     stocksManager.addStock(SAMPLE_STOCK);
 
                     //    then
-                    chai.expect(existingView).to.be.an("object").that.is.empty;
+                    assertStocksIsEmpty(existingView);
                 });
 
                 it('should not be able to add Stock with duplicated underlyingId', function () {
@@ -96,7 +96,7 @@ describe('api', function () {
                     chai.expect(removeResult).to.deep.equal({
                         removed: true
                     });
-                    chai.expect(stocksManager.getStocks()).to.be.an("object").that.is.empty;
+                    assertStocksIsEmpty(stocksManager.getStocks());
                 });
 
                 it('should only remove the specific Stock without afffecting other stock', function () {
@@ -138,7 +138,7 @@ describe('api', function () {
                     let json = stocksManager.getStocksAsJsonResponse();
 
                     //    then
-                    chai.expect(json).to.be.an("array").that.is.empty
+                    chai.expect(json).to.be.an("array").that.is.empty;
                 });
 
                 it('should return transformed array for existing stocks', function () {
@@ -178,6 +178,10 @@ describe('api', function () {
             };
 
             return this;
+        }
+
+        function assertStocksIsEmpty(stocks) {
+            return chai.expect(stocks).to.be.an("object").that.is.empty;
         }
     });
 });
