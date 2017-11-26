@@ -124,6 +124,21 @@ describe('api', function () {
                     chai.expect(removeResult.removed).to.equal(false);
                     chai.expect(stocksManager.getStocks()).to.have.own.property(UNDERLYING_ID);
                 });
+
+                it('should not mutate the existing view of stocks after removing a stock by stocksManager.removeStock', function () {
+                    //    given
+                    let stocksManager = newStocksManager(SAMPLE_STOCK);
+
+                    let existingView = stocksManager.getStocks();
+                    assertStocks(existingView).hasLength(1);
+
+                    //    when
+                    stocksManager.removeStock(UNDERLYING_ID);
+
+                    //    then
+                    assertStocks(existingView).hasLength(1);
+                    assertStocks(stocksManager.getStocks()).isEmpty();
+                });
             });
 
             describe('getStocksAsJsonResponse', function () {
