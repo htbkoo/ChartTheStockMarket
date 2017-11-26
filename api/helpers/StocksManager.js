@@ -2,6 +2,19 @@ let Map = require("immutable").Map;
 
 let Stock = require("../models/Stock");
 
+const createResult = {
+    addStock(added) {
+        return {
+            added
+        };
+    },
+    removeStock(removed) {
+        return {
+            removed
+        };
+    },
+};
+
 class StocksManager {
     constructor() {
         let stocks = Map();
@@ -13,24 +26,21 @@ class StocksManager {
             }
             let underlyingId = stock.getUnderlyingId();
             if (stocks.has(underlyingId)) {
-                return createAddResult(false);
+                return createResult.addStock(false);
             }
 
             stocks = stocks.set(underlyingId, stock.asJson());
 
-            return createAddResult(true);
+            return createResult.addStock(true);
         };
 
         this._removeStock = underlyingId => {
             if (!stocks.has(underlyingId)) {
-                return {
-                    removed: false
-                };
+                return createResult.removeStock(false);
+
             }
             stocks = stocks.remove(underlyingId);
-            return {
-                removed: true
-            };
+            return createResult.removeStock(true);
         };
     }
 
@@ -45,12 +55,6 @@ class StocksManager {
 
     removeStock(underlyingId) {
         return this._removeStock(underlyingId);
-    }
-}
-
-function createAddResult(added) {
-    return {
-        added
     }
 }
 
