@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import keycodeHelper from '../utils/keycodeHelper';
-import {actions} from "redux/reduxActions";
+import {actions} from "../redux/reduxActions";
 
 export class StockControls extends Component {
     constructor(props) {
