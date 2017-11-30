@@ -11,6 +11,7 @@
     "debug": "set DEBUG=express:* && node %NODE_DEBUG_OPTION% ./bin/www",
     "clean": "rimraf ./build/ && mkdir build",
     "build-ui": "cd ./views/chart-the-stock-market-ui && npm install --only=dev && npm install && npm run build",
+    "quick-build-ui": "cd ./views/chart-the-stock-market-ui && npm run build",
     "build-server": "babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,chart-the-stock-market-ui,build,__mocks__ --copy-files",
     "build-all": "npm run clean && npm run build-server && npm run build-ui",
     "rebuild-run": "npm run build-all && npm run run",

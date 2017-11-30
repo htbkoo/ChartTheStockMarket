@@ -1,0 +1,10 @@
+{
+  "chart": {
+  },
+  "stock": {
+    "stocks": [
+
+    ],
+    "isGettingStocks": true
+  }
+}
