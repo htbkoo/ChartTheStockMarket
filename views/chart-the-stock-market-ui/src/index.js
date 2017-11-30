@@ -12,8 +12,6 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import Immutable from "immutable";
 
-import {actions} from "./redux/reduxActions";
-
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools({
     serialize: {
@@ -27,8 +25,6 @@ let store = createStore(reducers, composeEnhancers(
         loggerMiddleware
     )
 ));
-
-store.dispatch(actions.fetchStocks());
 
 ReactDOM.render(
     <Provider store={store}>

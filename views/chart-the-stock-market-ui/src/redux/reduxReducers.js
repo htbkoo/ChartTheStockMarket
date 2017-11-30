@@ -13,7 +13,6 @@ export default function reducers(state = initialState, action) {
     let index = stateStocks.indexOf(targetUnderlyingId);
     switch (action.type) {
         case types.ADD_STOCK: {
-            console.log(state);
             if (index === -1) {
                 return setState(state).withStocks(stateStocks.push(targetUnderlyingId));
             }
@@ -32,13 +31,6 @@ export default function reducers(state = initialState, action) {
                 return setState(state).withStocks(stateStocks.delete(oldIndex).insert(newIndex, reorderedId));
             }
             return state;
-        }
-        case types.GET_STOCKS_REQUEST: {
-            return state.set("isGettingStocks", true);
-        }
-        case types.GET_STOCKS_SUCCESS: {
-            let {stocks} = action;
-            return setState(state.set("isGettingStocks", false)).withStocks(List(stocks));
         }
         default:
             return state;
