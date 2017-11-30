@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/chart_the_stock_market/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/views/chart-the-stock-market-ui/build" />
       <excludeFolder url="file://$MODULE_DIR$/views/chart-the-stock-market-ui/node_modules" />
     </content>
