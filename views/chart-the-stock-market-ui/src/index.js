@@ -10,12 +10,18 @@ import {createLogger} from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import Immutable from "immutable";
 
 import {actions} from "./redux/reduxActions";
 
 const loggerMiddleware = createLogger();
+const composeEnhancers = composeWithDevTools({
+    serialize: {
+        immutable: Immutable
+    }
+});
 
-let store = createStore(reducers, composeWithDevTools(
+let store = createStore(reducers, composeEnhancers(
     applyMiddleware(
         thunkMiddleware,
         loggerMiddleware
