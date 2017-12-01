@@ -3,12 +3,16 @@ import {Map, List} from 'immutable';
 import StocksModel from "../components/model/StocksModel";
 
 const initialState = Map({
-    stocksModel: newStocksModel(List())
+    "chart": Map(),
+    "stock": Map({
+        "stocksModel": newStocksModel(List()),
+        "isGettingStocks": true
+    })
 });
 
 export default function reducers(state = initialState, action) {
     let targetUnderlyingId = action.underlyingId;
-    let stocksModel = state.get('stocksModel');
+    let stocksModel = state.getIn(['stock', 'stocksModel']);
     let stateStocks = stocksModel.getStocks();
     let index = stateStocks.indexOf(targetUnderlyingId);
     switch (action.type) {
@@ -48,7 +52,7 @@ function newStocksModel(stocksList) {
 function setState(state) {
     return {
         withStocks(stocks) {
-            return state.set('stocksModel', newStocksModel(stocks));
+            return state.setIn(['stock','stocksModel'], newStocksModel(stocks));
         }
     }
 }

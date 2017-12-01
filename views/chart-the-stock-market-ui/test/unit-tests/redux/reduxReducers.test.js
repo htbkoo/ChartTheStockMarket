@@ -10,6 +10,7 @@ chai.use(chaiImmutable);
 
 describe("reduxReducers", function () {
     const initialState = createImmutableState().withStocksModelFromStocks([]);
+    const initialStateRef = createImmutableState().withStocksModelFromStocks([]);
 
     describe("no action", function () {
         it("should return the initial state", testReducer({
@@ -167,15 +168,12 @@ describe("reduxReducers", function () {
             if (isDefined(paramState)) {
                 assertState(paramState).toHaveNoMutation.suchThat.itEqualsTo(previousState);
             }
-            assertState(initialState).toHaveNoMutation.suchThat.itEqualsTo(Map({
-                    stocksModel: new StocksModel(List())
-                })
-            );
+            assertState(initialState).toHaveNoMutation.suchThat.itEqualsTo(initialStateRef);
         };
     }
 
     function assertState(state) {
-        const chaiStateAssert = target => chai.expect(state.get('stocksModel').getStocks()).to.equal(target.get('stocksModel').getStocks());
+        const chaiStateAssert = target => chai.expect(state.getIn(['stock', 'stocksModel']).getStocks()).to.equal(target.getIn(['stock', 'stocksModel']).getStocks());
 
         return {
             toHaveNoMutation: {
@@ -195,7 +193,11 @@ describe("reduxReducers", function () {
         return {
             withStocksModelFromStocks(stocks) {
                 return Map({
-                    stocksModel: new StocksModel(List(stocks))
+                    "chart": Map(),
+                    "stock": Map({
+                        "stocksModel": new StocksModel(List(stocks)),
+                        "isGettingStocks": true
+                    })
                 });
             }
         };
