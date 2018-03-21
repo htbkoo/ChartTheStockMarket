@@ -19,21 +19,13 @@
     <orderEntry type="library" name="chai-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="sinon-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="mocha-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="promise-polyfill-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="socket.io-client-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="socket.io-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="enzyme-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="chai-enzyme-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="react-redux-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="prop-types-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="react-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="chai-as-promised-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="sinon-test-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="supertest-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="loglevel-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="superagent-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="redux-devtools-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="request-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="jest-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="@types/supertest" level="application" />
+    <orderEntry type="library" name="superagent-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="supertest-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="@types/superagent" level="application" />
   </component>
 </module>
